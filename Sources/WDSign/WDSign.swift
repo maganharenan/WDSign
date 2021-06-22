@@ -1,7 +1,6 @@
 import SwiftUI
 import PencilKit
 
-@available(iOS 14.0, *)
 public struct ContentView: View {
     @Environment(\.undoManager) public var undoManager
     @State public var canvas = PKCanvasView()
@@ -37,13 +36,9 @@ public struct ContentView: View {
 //                SignatureCanvas(canvas: $canvas, isDraw: $isDraw, color: $color, type: $type)
                 buildSignatureFieldsTemplate()
                     .padding()
-                    
-                .navigationTitle("WDSign")
-                .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: navigationBarLeadingButtons, trailing: navigationBarTrailingButtons)
                     .sheet(isPresented: $colorPicker, content: {
-                        ColorPicker("Pick a color", selection: $color)
-                            .padding()
+
                 })
             }
         }
@@ -56,21 +51,21 @@ public struct ContentView: View {
                 saveImage()
             }, label: {
                 Image(systemName: "square.and.arrow.down.fill")
-                    .font(.title3)
+      
             })
             
             Button(action: {
                 eraseCanvas()
             }, label: {
                 Image(systemName: "xmark")
-                    .font(.title3)
+                 
             })
             
             Button(action: {
                 undoManager?.undo()
             }, label: {
                 Image(systemName: "arrow.uturn.left")
-                    .font(.title3)
+                   
             })
         }
     }
@@ -82,72 +77,22 @@ public struct ContentView: View {
                 undoManager?.redo()
             }, label: {
                 Image(systemName: "arrow.uturn.right")
-                    .font(.title3)
+                   
             })
             
             Button(action: {
                 isDraw.toggle()
             }, label: {
                 Image(systemName: isDraw ? "pencil.slash" : "pencil")
-                    .font(.title3)
+                    
             })
-            
-            
-            
-            Menu {
-                Button(action: {
-                    colorPicker.toggle()
-                }, label: {
-                    Label {
-                        Text("Color")
-                    } icon: {
-                        Image(systemName: "eyedropper.full")
-                    }
-                })
-                
-                Button(action: {
-                    isDraw = true
-                    type = .pencil
-                }, label: {
-                    Label {
-                        Text("Pencil")
-                    } icon: {
-                        Image(systemName: "pencil")
-                    }
-                })
-                
-                Button(action: {
-                    isDraw = true
-                    type = .pen
-                }, label: {
-                    Label {
-                        Text("Pen")
-                    } icon: {
-                        Image(systemName: "pencil.tip")
-                    }
-                })
-                
-                Button(action: {
-                    isDraw = true
-                    type = .marker
-                }, label: {
-                    Label {
-                        Text("Marker")
-                    } icon: {
-                        Image(systemName: "highlighter")
-                    }
-                })
-            } label: {
-                Image(systemName: "gear")
-                    .font(.title3)
-            }
         }
     }
     
     var signatureFieldModel: some View {
         ZStack(alignment: .bottom) {
-            SignatureCanvas(canvas: $canvas, isDraw: $isDraw, color: $color, type: $type)
-                .frame(width: screenBounds.width / 2, height: screenBounds.height / 3, alignment: .center)
+            //SignatureCanvas(canvas: $canvas, isDraw: $isDraw, color: $color, type: $type)
+                //.frame(width: screenBounds.width / 2, height: screenBounds.height / 3, alignment: .center)
             
             Rectangle()
                 .foregroundColor(.black)
@@ -184,37 +129,34 @@ public struct ContentView: View {
     let screenBounds = UIScreen.main.bounds
 }
 
-@available(iOS 14.0, *)
 public struct ContentView_Previews: PreviewProvider {
     public static var previews: some View {
         ContentView(documentTemplate: SignDocumentTemplate(id: 0, watermark: "teste", logo: "teste", signatureField1Alignment: "teste", signatureField2Alignment: "testea"))
     }
 }
 
-@available(iOS 14.0, *)
-public struct SignatureCanvas: UIViewRepresentable {
-    @Binding public var canvas: PKCanvasView
-    @Binding public var isDraw: Bool
-    @Binding public var color: Color
-    @Binding public var type: PKInkingTool.InkType
-    
-    public var ink: PKInkingTool {
-        PKInkingTool(type, color: UIColor(color), width: 3)
-    }
-    
-    public let eraser = PKEraserTool(.bitmap)
-    
-    public func makeUIView(context: Context) -> PKCanvasView {
-        canvas.drawingPolicy = .anyInput
-        canvas.tool = isDraw ? ink : eraser
-        canvas.backgroundColor = .clear
-        return canvas
-    }
-    
-    public func updateUIView(_ uiView: PKCanvasView, context: Context) {
-        uiView.tool = isDraw ? ink : eraser
-    }
-}
+//public struct SignatureCanvas: UIViewRepresentable {
+//    @Binding public var canvas: PKCanvasView
+//    @Binding public var isDraw: Bool
+//    @Binding public var color: Color
+//    @Binding public var type: PKInkingTool.InkType
+//
+//    public var ink: PKInkingTool {
+//        PKInkingTool(type, color: UIColor(color), width: 3)
+//    }
+//
+//    public let eraser = PKEraserTool(.bitmap)
+//
+//    public func makeUIView(context: Context) -> PKCanvasView {
+//        canvas.tool = isDraw ? ink : eraser
+//        canvas.backgroundColor = .clear
+//        return canvas
+//    }
+//
+//    public func updateUIView(_ uiView: PKCanvasView, context: Context) {
+//        uiView.tool = isDraw ? ink : eraser
+//    }
+//}
 
 public struct SignDocumentTemplate: Identifiable {
     public var id: Int
@@ -232,7 +174,7 @@ public struct SignDocumentTemplate: Identifiable {
     }
 }
 
-@available(iOS 14.0, *)
+
 extension String {
     func convertToAlignment() -> Alignment {
         switch self {

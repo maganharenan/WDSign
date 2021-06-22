@@ -28,17 +28,9 @@ final class WDSignDAO: WDSignDAOProtocol {
                 PlaceholderSubscriber3,
                 Watermark,
                 Logo
-        FROM    (
-                SELECT  ID,
-                        Title,
-                        Description,
-                        SignDocumentText,
-                        SignDocumentSubscriberID,
-                        SignDocumentTemplateID
-                FROM    SignDocument
-        ) AS A,
-        SignDocumentSubscriber AS SDS,
-        SignDocumentTemplate AS SDT
+        FROM    SignDocument A,
+                SignDocumentSubscriber AS SDS,
+                SignDocumentTemplate AS SDT
         WHERE   A.SignDocumentSubscriberID = SDS.ID
         AND     A.SignDocumentTemplateID = SDT.ID
         AND     A.ID = \(documentID)

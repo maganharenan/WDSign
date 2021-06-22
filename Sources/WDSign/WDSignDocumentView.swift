@@ -21,7 +21,7 @@ public struct WDSignDocumentView: View {
                         .frame(width: 100, height: 44)
                 })
                 
-                Text(document.title)
+                Text(documentLayoutInfo?.title ?? "")
                     //.font(.title2)
                     .foregroundColor(Color(#colorLiteral(red: 0.2352941176, green: 0.4117647059, blue: 0.4980392157, alpha: 1)))
                     .frame(maxWidth: .infinity)
@@ -45,21 +45,16 @@ public struct WDSignDocumentView: View {
             .background(Color(#colorLiteral(red: 0.9333333333, green: 0.9529411765, blue: 0.9607843137, alpha: 1)))
         }
     }
-    
-    var document: SignDocument
     var documentLayoutInfo: SignDocumentLayoutInfo?
     
-    init(document: SignDocument) {
-        self.document = document
+    public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations()
     }
 }
 
 struct WDSignDocumentView_Previews: PreviewProvider {
     static var previews: some View {
-        WDSignDocumentView(document: dummyDocument)
-            .previewLayout(.fixed(width: 1024, height: 768))
+        WDSignDocumentView(documentID: 1)
     }
 }
 
-let dummyDocument = SignDocument(status: "", id: 0, title: "Assinatura de recebimento", endDate: nil, expireDate: nil, logID: nil, signDateTime: nil, signsPerPeriod: 2, periodID: "154896", cycle: "Ciclo 1", placeholderSubscriber1: "", placeholderSubscriber2: "", placeholderSubscriber3: "")

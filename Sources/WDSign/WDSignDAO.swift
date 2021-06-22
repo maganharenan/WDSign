@@ -10,14 +10,14 @@ import SQLite
 
 protocol WDSignDAOProtocol {
     init()
-    func fetchDocumentInformations() -> SignDocumentLayoutInfo?
+    func fetchDocumentInformations(documentID: Int) -> SignDocumentLayoutInfo?
 }
 
 final class WDSignDAO: WDSignDAOProtocol {
     static let instance = WDSignDAO()
     internal init() {}
     
-    public func fetchDocumentInformations() -> SignDocumentLayoutInfo? {
+    public func fetchDocumentInformations(documentID: Int) -> SignDocumentLayoutInfo? {
         let query = """
         SELECT  A.ID,
                 Title,
@@ -41,7 +41,7 @@ final class WDSignDAO: WDSignDAOProtocol {
         SignDocumentTemplate AS SDT
         WHERE   A.SignDocumentSubscriberID = SDS.ID
         AND     A.SignDocumentTemplateID = SDT.ID
-        AND     A.ID =
+        AND     A.ID = \(documentID)
         """
         
         var document: SignDocumentLayoutInfo?

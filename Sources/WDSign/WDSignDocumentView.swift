@@ -48,7 +48,7 @@ public struct WDSignDocumentView: View {
     var documentLayoutInfo: SignDocumentLayoutInfo?
     
     public init(documentID: Int) {
-        self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations()
+        self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
     }
 }
 

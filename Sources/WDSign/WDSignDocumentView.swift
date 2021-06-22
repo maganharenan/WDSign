@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
-    var body: some View {
+public struct WDSignDocumentView: View {
+    public var body: some View {
         VStack(spacing: 0) {
             /// Navigation  bar
             HStack {
@@ -55,9 +55,9 @@ struct SwiftUIView: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct WDSignDocumentView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView(document: dummyDocument)
+        WDSignDocumentView(document: dummyDocument)
             .previewLayout(.fixed(width: 1024, height: 768))
     }
 }

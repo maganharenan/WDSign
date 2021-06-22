@@ -22,7 +22,7 @@ struct SwiftUIView: View {
                 })
                 
                 Text(document.title)
-                    .font(.title2)
+                    //.font(.title2)
                     .foregroundColor(Color(#colorLiteral(red: 0.2352941176, green: 0.4117647059, blue: 0.4980392157, alpha: 1)))
                     .frame(maxWidth: .infinity)
                 

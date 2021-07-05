@@ -11,7 +11,7 @@ public struct SignFieldView: View {
     public var body: some View {
         VStack(spacing: 0) {
             Button {
-                showSignatureBox()
+                showSignatureBox(appDelegate: appDelegate)
             } label: {
                 Text("Sign")
                     .font(.body)

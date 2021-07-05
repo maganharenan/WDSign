@@ -46,6 +46,8 @@ public struct WDSignDocumentView: View {
                 }
                 
                 Text(documentLayoutInfo.documentText)
+                
+                SignField()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(#colorLiteral(red: 0.9333333333, green: 0.9529411765, blue: 0.9607843137, alpha: 1)))
@@ -68,3 +70,20 @@ struct WDSignDocumentView_Previews: PreviewProvider {
     }
 }
 
+struct SignField: View {
+    var body: some View {
+        VStack {
+            Button {
+                
+            } label: {
+                Text("Sign")
+            }
+
+            Divider()
+            
+            Text("Name")
+            Text("Role")
+            Text("Document")
+        }
+    }
+}

@@ -45,9 +45,15 @@ public struct WDSignDocumentView: View {
                         .aspectRatio(contentMode: .fit)
                 }
                 
-                Text(documentLayoutInfo.documentText)
+                VStack(spacing: 0) {
+                    Text(documentLayoutInfo.documentText)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 
-                SignField()
+                    SignFieldView(showModal: $showModal)
+                        .sheet(isPresented: $showModal, content: {
+                            SignatureBoxView()
+                        })
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(#colorLiteral(red: 0.9333333333, green: 0.9529411765, blue: 0.9607843137, alpha: 1)))
@@ -59,6 +65,8 @@ public struct WDSignDocumentView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @State var showModal = false
+    
     public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
     }
@@ -67,23 +75,5 @@ public struct WDSignDocumentView: View {
 struct WDSignDocumentView_Previews: PreviewProvider {
     static var previews: some View {
         WDSignDocumentView(documentID: 1)
-    }
-}
-
-struct SignField: View {
-    var body: some View {
-        VStack {
-            Button {
-                
-            } label: {
-                Text("Sign")
-            }
-
-            Divider()
-            
-            Text("Name")
-            Text("Role")
-            Text("Document")
-        }
     }
 }

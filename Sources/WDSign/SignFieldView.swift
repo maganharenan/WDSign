@@ -21,7 +21,7 @@ public struct SignFieldView: View {
                         .frame(maxWidth: .infinity, maxHeight: 44)
                 } else {
                     SignatureCanvas(canvas: $canvas)
-                        .disabled(true)
+                        //.disabled(true)
                 }
             }
             

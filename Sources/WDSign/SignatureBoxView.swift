@@ -61,6 +61,7 @@ struct SignatureBoxView: View {
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
+    
     @Binding var canvas: PKCanvasView
 }
 

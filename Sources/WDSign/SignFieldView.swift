@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PencilKit
 
 public struct SignFieldView: View {
     public var body: some View {
@@ -39,17 +40,15 @@ public struct SignFieldView: View {
     
     var appDelegate: UIApplicationDelegate?
     @Binding var showModal: Bool
+    @Environment(\.undoManager) public var undoManager
+    @State public var canvas = PKCanvasView()
+    @State public var isDraw = true
+    @State public var colorPicker = false
+    @State public var color: Color = .black
+    @State public var type: PKInkingTool.InkType = .pen
     
     private func showSignatureBox(appDelegate: UIApplicationDelegate? = nil) {
-        guard let appDelegate = appDelegate else { return }
         showModal.toggle()
-        
-        let modalViewController = UIHostingController(rootView: SignatureBoxView())
-        
-        modalViewController.isModalInPresentation = true
-        modalViewController.modalPresentationStyle = .formSheet
-
-        appDelegate.window??.rootViewController?.present(modalViewController, animated: true)
     }
 }
 

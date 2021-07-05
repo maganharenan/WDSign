@@ -49,10 +49,7 @@ public struct WDSignDocumentView: View {
                     Text(documentLayoutInfo.documentText)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 
-                    SignFieldView(showModal: $showModal)
-                        .sheet(isPresented: $showModal, content: {
-                            SignatureBoxView()
-                        })
+                    SignFieldView(appDelegate: appDelegate, showModal: $showModal)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -66,14 +63,16 @@ public struct WDSignDocumentView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var showModal = false
+    var appDelegate: UIApplicationDelegate?
     
-    public init(documentID: Int) {
+    public init(documentID: Int, appDelegate: UIApplicationDelegate?) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
+        self.appDelegate = appDelegate
     }
 }
 
 struct WDSignDocumentView_Previews: PreviewProvider {
     static var previews: some View {
-        WDSignDocumentView(documentID: 1)
+        WDSignDocumentView(documentID: 1, appDelegate: nil)
     }
 }

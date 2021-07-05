@@ -37,15 +37,24 @@ public struct SignFieldView: View {
         .frame(width: 270, height: 104)
     }
     
+    var appDelegate: UIApplicationDelegate?
     @Binding var showModal: Bool
     
-    private func showSignatureBox() {
+    private func showSignatureBox(appDelegate: UIApplicationDelegate? = nil) {
+        guard let appDelegate = appDelegate else { return }
         showModal.toggle()
+        
+        let modalViewController = UIHostingController(rootView: SignatureBoxView())
+        
+        modalViewController.isModalInPresentation = true
+        modalViewController.modalPresentationStyle = .formSheet
+
+        appDelegate.window??.rootViewController?.present(modalViewController, animated: true)
     }
 }
 
 struct SignFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SignFieldView(showModal: .constant(false))
+        SignFieldView(appDelegate: nil, showModal: .constant(false))
     }
 }

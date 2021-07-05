@@ -70,7 +70,7 @@ public struct WDSignDocumentView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var showModal = false
-    @State var canvas = Array<PKCanvasView>()
+    @State var canvas = [PKCanvasView()]
     @State var selectedCanvasIndex: Int = 0
     
     public init(documentID: Int) {

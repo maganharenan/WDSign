@@ -75,6 +75,8 @@ public struct WDSignDocumentView: View {
     
     public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
+        
+        canvas.append(PKCanvasView())
     }
 }
 

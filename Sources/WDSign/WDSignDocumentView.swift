@@ -13,7 +13,7 @@ public struct WDSignDocumentView: View {
             /// Navigation  bar
             HStack {
                 Button(action: {
-                    
+                    self.presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Cancel")
                         .font(.body)
@@ -54,6 +54,8 @@ public struct WDSignDocumentView: View {
     }
     
     var documentLayoutInfo: SignDocumentLayoutInfo!
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)

@@ -38,12 +38,13 @@ struct SignatureBoxView: View {
                 .background(Color(#colorLiteral(red: 0.8666666667, green: 0.9058823529, blue: 0.9254901961, alpha: 1)))
                 
                 ZStack {
-                    SignatureCanvas(canvas: .constant(PKCanvasView()), isDraw: .constant(true), color: .constant(.red), type: .constant(.pen))
-                    
-                    Rectangle()
-                        .frame(width: 456, height: 3, alignment: .center)
-                        .padding(.bottom, 28)
+                    SignatureCanvas(canvas: $canvas, isDraw: .constant(true), color: .constant(.red), type: .constant(.pencil))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                    
+//                    Rectangle()
+//                        .frame(width: 456, height: 3, alignment: .center)
+//                        .padding(.bottom, 28)
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
@@ -60,6 +61,8 @@ struct SignatureBoxView: View {
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
+    
+    @State var canvas = PKCanvasView()
 }
 
 struct SignatureBoxView_Previews: PreviewProvider {
@@ -76,18 +79,16 @@ public struct SignatureCanvas: UIViewRepresentable {
     @Binding public var type: PKInkingTool.InkType
 
     public var ink: PKInkingTool {
-        PKInkingTool(type, color: UIColor(color), width: 3)
+        PKInkingTool(.pencil, color: .black, width: 3)
     }
 
-    public let eraser = PKEraserTool(.bitmap)
-
     public func makeUIView(context: Context) -> PKCanvasView {
-        canvas.tool = isDraw ? ink : eraser
-        canvas.backgroundColor = .clear
+        canvas.tool = ink
+        canvas.backgroundColor = .blue
         return canvas
     }
 
     public func updateUIView(_ uiView: PKCanvasView, context: Context) {
-        uiView.tool = isDraw ? ink : eraser
+        uiView.tool = ink
     }
 }

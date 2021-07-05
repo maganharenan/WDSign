@@ -51,7 +51,7 @@ public struct WDSignDocumentView: View {
                         Text(documentLayoutInfo.documentText)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         
-                        SignFieldView(showModal: $showModal, canvas: $canvas[0])
+                        SignFieldView(showModal: $showModal, canvas: $canvas)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -59,7 +59,7 @@ public struct WDSignDocumentView: View {
             }
             
             if showModal {
-                SignatureBoxView(canvas: $canvas[selectedCanvasIndex])
+                SignatureBoxView(canvas: $canvas)
             }
         }
         .navigationBarHidden(true)
@@ -70,13 +70,11 @@ public struct WDSignDocumentView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var showModal = false
-    @State var canvas = [PKCanvasView()]
+    @State var canvas = PKCanvasView()
     @State var selectedCanvasIndex: Int = 0
     
     public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
-        
-        canvas.append(PKCanvasView())
     }
 }
 

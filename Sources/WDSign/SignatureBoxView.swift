@@ -38,7 +38,7 @@ struct SignatureBoxView: View {
                 .background(Color(#colorLiteral(red: 0.8666666667, green: 0.9058823529, blue: 0.9254901961, alpha: 1)))
                 
                 ZStack {
-                    SignatureCanvas(canvas: .constant(PKCanvasView()), isDraw: .constant(false), color: .constant(.red), type: .constant(.pen))
+                    SignatureCanvas(canvas: .constant(PKCanvasView()), isDraw: .constant(true), color: .constant(.red), type: .constant(.pen))
                     
                     Rectangle()
                         .frame(width: 456, height: 3, alignment: .center)

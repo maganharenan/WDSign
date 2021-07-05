@@ -33,7 +33,7 @@ public struct ContentView: View {
                     .padding(32)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 
-                SignatureCanvas(canvas: $canvas, isDraw: $isDraw, color: $color, type: $type)
+                //SignatureCanvas(canvas: $canvas, isDraw: $isDraw, color: $color, type: $type)
                 buildSignatureFieldsTemplate()
                     .padding()
                     .navigationBarItems(leading: navigationBarLeadingButtons, trailing: navigationBarTrailingButtons)
@@ -91,8 +91,8 @@ public struct ContentView: View {
     
     var signatureFieldModel: some View {
         ZStack(alignment: .bottom) {
-            SignatureCanvas(canvas: $canvas, isDraw: $isDraw, color: $color, type: $type)
-                .frame(width: screenBounds.width / 2, height: screenBounds.height / 3, alignment: .center)
+            //SignatureCanvas(canvas: $canvas, isDraw: $isDraw, color: $color, type: $type)
+                //.frame(width: screenBounds.width / 2, height: screenBounds.height / 3, alignment: .center)
             
             Rectangle()
                 .foregroundColor(.black)

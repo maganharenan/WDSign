@@ -38,13 +38,13 @@ struct SignatureBoxView: View {
                 .background(Color(#colorLiteral(red: 0.8666666667, green: 0.9058823529, blue: 0.9254901961, alpha: 1)))
                 
                 ZStack {
-                    SignatureCanvas(canvas: $canvas, isDraw: .constant(true), color: .constant(.red), type: .constant(.pencil))
+                    SignatureCanvas(canvas: $canvas)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     
-//                    Rectangle()
-//                        .frame(width: 456, height: 3, alignment: .center)
-//                        .padding(.bottom, 28)
-//                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                    Rectangle()
+                        .frame(width: 456, height: 3, alignment: .center)
+                        .padding(.bottom, 28)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
@@ -63,6 +63,7 @@ struct SignatureBoxView: View {
     }
     
     @State var canvas = PKCanvasView()
+    @Environment(\.undoManager) public var undoManager
 }
 
 struct SignatureBoxView_Previews: PreviewProvider {
@@ -74,17 +75,15 @@ struct SignatureBoxView_Previews: PreviewProvider {
 
 public struct SignatureCanvas: UIViewRepresentable {
     @Binding public var canvas: PKCanvasView
-    @Binding public var isDraw: Bool
-    @Binding public var color: Color
-    @Binding public var type: PKInkingTool.InkType
 
     public var ink: PKInkingTool {
-        PKInkingTool(.pencil, color: .black, width: 3)
+        PKInkingTool(.pen, color: .black, width: 7)
     }
 
     public func makeUIView(context: Context) -> PKCanvasView {
+        canvas.drawingPolicy = .anyInput
         canvas.tool = ink
-        canvas.backgroundColor = .blue
+        canvas.backgroundColor = .white
         return canvas
     }
 

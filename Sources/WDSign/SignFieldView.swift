@@ -40,7 +40,6 @@ public struct SignFieldView: View {
     
     var appDelegate: UIApplicationDelegate?
     @Binding var showModal: Bool
-    @Environment(\.undoManager) public var undoManager
     @State public var canvas = PKCanvasView()
     @State public var isDraw = true
     @State public var colorPicker = false

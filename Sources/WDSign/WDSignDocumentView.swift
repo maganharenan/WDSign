@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PencilKit
 
 public struct WDSignDocumentView: View {
     public var body: some View {
@@ -50,7 +51,7 @@ public struct WDSignDocumentView: View {
                         Text(documentLayoutInfo.documentText)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         
-                        SignFieldView(appDelegate: appDelegate, showModal: $showModal)
+                        SignFieldView(showModal: $showModal, canvas: $canvas[0])
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -58,7 +59,7 @@ public struct WDSignDocumentView: View {
             }
             
             if showModal {
-                SignatureBoxView()
+                SignatureBoxView(canvas: $canvas[selectedCanvasIndex])
             }
         }
         .navigationBarHidden(true)
@@ -69,16 +70,16 @@ public struct WDSignDocumentView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var showModal = false
-    var appDelegate: UIApplicationDelegate?
+    @State var canvas = Array<PKCanvasView>()
+    @State var selectedCanvasIndex: Int = 0
     
-    public init(documentID: Int, appDelegate: UIApplicationDelegate?) {
+    public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
-        self.appDelegate = appDelegate
     }
 }
 
 struct WDSignDocumentView_Previews: PreviewProvider {
     static var previews: some View {
-        WDSignDocumentView(documentID: 1, appDelegate: nil)
+        WDSignDocumentView(documentID: 1)
     }
 }

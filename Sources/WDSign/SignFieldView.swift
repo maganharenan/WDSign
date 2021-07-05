@@ -12,12 +12,17 @@ public struct SignFieldView: View {
     public var body: some View {
         VStack(spacing: 0) {
             Button {
-                showSignatureBox(appDelegate: appDelegate)
+                showSignatureBox()
             } label: {
-                Text("Sign")
-                    .font(.body)
-                    .foregroundColor(Color(#colorLiteral(red: 0.9647058824, green: 0.7568627451, blue: 0.4470588235, alpha: 1)))
-                    .frame(maxWidth: .infinity, maxHeight: 44)
+                if canvas.drawing.bounds.isEmpty {
+                    Text("Sign")
+                        .font(.body)
+                        .foregroundColor(Color(#colorLiteral(red: 0.9647058824, green: 0.7568627451, blue: 0.4470588235, alpha: 1)))
+                        .frame(maxWidth: .infinity, maxHeight: 44)
+                } else {
+                    SignatureCanvas(canvas: $canvas)
+                        .disabled(true)
+                }
             }
             
             Rectangle()
@@ -37,22 +42,24 @@ public struct SignFieldView: View {
         }
         .frame(width: 270, height: 104)
     }
-    
-    var appDelegate: UIApplicationDelegate?
+
     @Binding var showModal: Bool
-    @State public var canvas = PKCanvasView()
-    @State public var isDraw = true
-    @State public var colorPicker = false
-    @State public var color: Color = .black
-    @State public var type: PKInkingTool.InkType = .pen
+    @Binding public var canvas: PKCanvasView
     
-    private func showSignatureBox(appDelegate: UIApplicationDelegate? = nil) {
+    private func showSignatureBox() {
         showModal.toggle()
     }
 }
 
 struct SignFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SignFieldView(appDelegate: nil, showModal: .constant(false))
+        SignFieldView(showModal: .constant(false), canvas: .constant(PKCanvasView()))
+    }
+}
+
+extension PKDrawing {
+    
+    func isEmpty() -> Bool {
+        return strokes.isEmpty
     }
 }

@@ -61,14 +61,12 @@ struct SignatureBoxView: View {
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
-    
-    @State var canvas = PKCanvasView()
-    @Environment(\.undoManager) public var undoManager
+    @Binding var canvas: PKCanvasView
 }
 
 struct SignatureBoxView_Previews: PreviewProvider {
     static var previews: some View {
-        SignatureBoxView()
+        SignatureBoxView(canvas: .constant(PKCanvasView()))
             .previewLayout(.fixed(width: 1024, height: 768))
     }
 }

@@ -43,11 +43,12 @@ final class WDSignDAO: WDSignDAOProtocol {
                 document = SignDocumentLayoutInfo(id: Int(row[0] as! Int64),
                                                   title: row[1] as! String,
                                                   description: row[2] as? String,
-                                                  placeholderSubscriber1: row[3] as? String,
-                                                  placeholderSubscriber2: row[4] as? String,
-                                                  placeholderSubscriber3: row[5] as? String,
-                                                  watermark: row[6] as! String,
-                                                  logo: row[7] as! String)
+                                                  documentText: row[3] as! String,
+                                                  placeholderSubscriber1: row[4] as? String,
+                                                  placeholderSubscriber2: row[5] as? String,
+                                                  placeholderSubscriber3: row[6] as? String,
+                                                  watermark: row[7] as! String,
+                                                  logo: row[8] as! String)
             }
         } catch {
             print("fetchDocumentInformations failled: \(error.localizedDescription)")
@@ -61,6 +62,7 @@ struct SignDocumentLayoutInfo {
     let id: Int
     let title: String
     let description: String?
+    let documentText: String
     let placeholderSubscriber1: String?
     let placeholderSubscriber2: String?
     let placeholderSubscriber3: String?

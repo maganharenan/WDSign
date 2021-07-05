@@ -22,7 +22,7 @@ public struct WDSignDocumentView: View {
                 })
                 
                 Text(documentLayoutInfo?.title ?? "")
-                    //.font(.title2)
+                    .font(.title2)
                     .foregroundColor(Color(#colorLiteral(red: 0.2352941176, green: 0.4117647059, blue: 0.4980392157, alpha: 1)))
                     .frame(maxWidth: .infinity)
                 
@@ -39,13 +39,21 @@ public struct WDSignDocumentView: View {
             
             /// Document layout
             ZStack {
-                Text("")
+                if let backgroundWatermark = documentLayoutInfo?.watermark {
+                    Image(backgroundWatermark)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .aspectRatio(contentMode: .fit)
+                }
+                
+                Text(documentLayoutInfo.documentText)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(#colorLiteral(red: 0.9333333333, green: 0.9529411765, blue: 0.9607843137, alpha: 1)))
         }
+        .navigationBarHidden(true)
     }
-    var documentLayoutInfo: SignDocumentLayoutInfo?
+    
+    var documentLayoutInfo: SignDocumentLayoutInfo!
     
     public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)

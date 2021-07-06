@@ -75,7 +75,7 @@ struct SignatureBoxView: View {
     }
     
     private func saveSignature() {
-        let imageArea: CGRect = CGRect(x: 0, y: 0, width: 104, height: 44)
+        let imageArea: CGRect = canvas.drawing.bounds
         signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
         
         showModal.toggle()

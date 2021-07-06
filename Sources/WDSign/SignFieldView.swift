@@ -21,6 +21,7 @@ public struct SignFieldView: View {
                         .frame(maxWidth: .infinity, maxHeight: 44)
                 } else {
                     signatureImage
+                        .frame(maxWidth: .infinity, maxHeight: 88)
                 }
             }
             

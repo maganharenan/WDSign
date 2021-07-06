@@ -64,24 +64,27 @@ struct SignatureBoxView: View {
     
     @Binding public var canvas: PKCanvasView
     @Binding public var showModal: Bool
+    @Binding public var signatureImage: Image
     
     private func eraseCanvas() {
         canvas = PKCanvasView()
     }
     
     private func cancelSignature() {
-        canvas = PKCanvasView()
         showModal.toggle()
     }
     
     private func saveSignature() {
+        let imageArea: CGRect = CGRect(x: 0, y: 0, width: 104, height: 44)
+        signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
+        
         showModal.toggle()
     }
 }
 
 struct SignatureBoxView_Previews: PreviewProvider {
     static var previews: some View {
-        SignatureBoxView(canvas: .constant(PKCanvasView()), showModal: .constant(true))
+        SignatureBoxView(canvas: .constant(PKCanvasView()), showModal: .constant(true), signatureImage: .constant(Image(systemName: "")))
             .previewLayout(.fixed(width: 1024, height: 768))
     }
 }

@@ -20,9 +20,7 @@ public struct SignFieldView: View {
                         .foregroundColor(Color(#colorLiteral(red: 0.9647058824, green: 0.7568627451, blue: 0.4470588235, alpha: 1)))
                         .frame(maxWidth: .infinity, maxHeight: 44)
                 } else {
-                    SignatureCanvas(canvas: $canvas)
-                        .aspectRatio(contentMode: .fit)
-                        .disabled(true)
+                    signatureImage
                 }
             }
             
@@ -46,6 +44,7 @@ public struct SignFieldView: View {
 
     @Binding var showModal: Bool
     @Binding public var canvas: PKCanvasView
+    @Binding public var signatureImage: Image
     
     private func showSignatureBox() {
         showModal.toggle()
@@ -54,7 +53,7 @@ public struct SignFieldView: View {
 
 struct SignFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SignFieldView(showModal: .constant(false), canvas: .constant(PKCanvasView()))
+        SignFieldView(showModal: .constant(false), canvas: .constant(PKCanvasView()), signatureImage: .constant(Image(systemName: "")))
     }
 }
 

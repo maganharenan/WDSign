@@ -152,7 +152,7 @@ extension UIImage {
         let fileURL = documentsDirectory.appendingPathComponent(fileName)
         // get your UIImage jpeg data representation and check if the destination file url already exists
         if let data = self.pngData(),
-          !FileManager.default.fileExists(atPath: fileURL.path) {
+           !FileManager.default.fileExists(atPath: fileURL.path) {
             do {
                 // writes the image data to disk
                 try data.write(to: fileURL)
@@ -162,6 +162,8 @@ extension UIImage {
                 print("error saving file:", error)
                 completion(true)
             }
+        } else {
+            completion(true)
         }
     }
 }

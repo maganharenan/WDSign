@@ -51,7 +51,7 @@ public struct WDSignDocumentView: View {
                         Text(documentLayoutInfo.documentText)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         
-                        SignFieldView(showModal: $showModal, canvas: $canvas, signatureImage: $signatureImages)
+                        SignFieldView(showModal: $showModal, signatureImage: $signatureImages)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

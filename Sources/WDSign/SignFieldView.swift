@@ -45,7 +45,6 @@ public struct SignFieldView: View {
     }
 
     @Binding var showModal: Bool
-    @Binding public var canvas: PKCanvasView
     @Binding public var signatureImage: Image?
     
     private func showSignatureBox() {
@@ -55,7 +54,7 @@ public struct SignFieldView: View {
 
 struct SignFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SignFieldView(showModal: .constant(false), canvas: .constant(PKCanvasView()), signatureImage: .constant(Image(systemName: "")))
+        SignFieldView(showModal: .constant(false), signatureImage: .constant(Image(systemName: "")))
     }
 }
 

@@ -71,13 +71,19 @@ public struct WDSign: View {
     }
     
     private func saveDocument() {
-        buttonsOpactity = 0
-        
-        if buttonsOpactity == 0 {
+        withAnimation {
+            buttonsOpactity = 0
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self
                 .snapshot()
-                .saveImageOnDocuments() { _ in
-                    buttonsOpactity = 1
+                .saveImageOnDocuments() { segue in
+                    if segue {
+                        withAnimation {
+                            buttonsOpactity = 1
+                        }
+                    }
                 }
         }
     }
@@ -154,7 +160,7 @@ extension UIImage {
                 completion(true)
             } catch {
                 print("error saving file:", error)
-                completion(false)
+                completion(true)
             }
         }
     }

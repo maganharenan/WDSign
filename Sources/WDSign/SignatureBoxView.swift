@@ -65,12 +65,21 @@ struct SignatureBoxView: View {
     @Binding public var canvas: PKCanvasView
     @Binding public var showModal: Bool
     @Binding public var signatureImage: Image?
+    var storedCanvas: PKCanvasView!
+    
+    init(canvas: Binding<PKCanvasView>, showModal: Binding<Bool>, signatureImage: Binding<Image?>) {
+        self._canvas = canvas
+        self.storedCanvas = canvas.wrappedValue
+        self._showModal = showModal
+        self._signatureImage = signatureImage
+    }
     
     private func eraseCanvas() {
         canvas.drawing = PKDrawing()
     }
     
     private func cancelSignature() {
+        canvas = storedCanvas
         showModal.toggle()
     }
     

@@ -14,7 +14,7 @@ public struct SignFieldView: View {
             Button {
                 showSignatureBox()
             } label: {
-                if canvas.drawing.bounds.isEmpty {
+                if signatureImage == nil {
                     Text("Sign")
                         .font(.body)
                         .foregroundColor(Color(#colorLiteral(red: 0.9647058824, green: 0.7568627451, blue: 0.4470588235, alpha: 1)))
@@ -44,7 +44,7 @@ public struct SignFieldView: View {
 
     @Binding var showModal: Bool
     @Binding public var canvas: PKCanvasView
-    @Binding public var signatureImage: Image
+    @Binding public var signatureImage: Image?
     
     private func showSignatureBox() {
         showModal.toggle()

@@ -64,7 +64,7 @@ struct SignatureBoxView: View {
     
     @Binding public var canvas: PKCanvasView
     @Binding public var showModal: Bool
-    @Binding public var signatureImage: Image
+    @Binding public var signatureImage: Image?
     
     private func eraseCanvas() {
         canvas = PKCanvasView()

@@ -64,6 +64,19 @@ struct SignatureBoxView: View {
     
     @Binding public var canvas: PKCanvasView
     @Binding public var showModal: Bool
+    
+    private func eraseCanvas() {
+        canvas = PKCanvasView()
+    }
+    
+    private func cancelSignature() {
+        canvas = PKCanvasView()
+        showModal.toggle()
+    }
+    
+    private func saveSignature() {
+        showModal.toggle()
+    }
 }
 
 struct SignatureBoxView_Previews: PreviewProvider {

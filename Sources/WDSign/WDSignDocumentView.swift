@@ -49,9 +49,11 @@ public struct WDSignDocumentView: View {
                     
                     VStack(spacing: 0) {
                         Text(documentLayoutInfo.documentText)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .padding(.top, 100)
+                            .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
                         
                         SignFieldView(showModal: $showModal, signatureImage: $signatureImages)
+                            .padding(.bottom, 110)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

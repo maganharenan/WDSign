@@ -17,6 +17,7 @@ public struct SignFieldView: View {
                 if let signatureImage = signatureImage {
                    signatureImage
                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                        .frame(maxWidth: 270, maxHeight: 88)
                 } else {
                     Text("Sign")

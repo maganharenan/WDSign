@@ -59,7 +59,7 @@ public struct WDSignDocumentView: View {
             }
             
             if showModal {
-                SignatureBoxView(canvas: $canvas)
+                SignatureBoxView(canvas: $canvas, showModal: $showModal)
             }
         }
         .navigationBarHidden(true)
@@ -69,9 +69,9 @@ public struct WDSignDocumentView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var showModal = false
-    @State var canvas = PKCanvasView()
-    @State var selectedCanvasIndex: Int = 0
+    @State public var showModal = false
+    @State public var canvas = PKCanvasView()
+    @State public var selectedCanvasIndex: Int = 0
     
     public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)

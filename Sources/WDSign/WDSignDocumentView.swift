@@ -30,11 +30,7 @@ public struct WDSign: View {
                         .frame(maxWidth: .infinity)
                     
                     Button(action: {
-                        buttonsOpactity = 0
-                        self
-                            .snapshot()
-                            .saveImageOnDocuments()
-                        buttonsOpactity = 1
+                        saveDocument()
                     }, label: {
                         Text("Save")
                             .font(.headline)
@@ -72,6 +68,18 @@ public struct WDSign: View {
     
     public init(documentID: Int) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
+    }
+    
+    private func saveDocument() {
+        buttonsOpactity = 0
+        
+        if buttonsOpactity == 0 {
+            self
+                .snapshot()
+                .saveImageOnDocuments() { _ in
+                    buttonsOpactity = 1
+                }
+        }
     }
 }
 
@@ -130,7 +138,7 @@ extension View {
 }
 
 extension UIImage {
-    func saveImageOnDocuments() {
+    func saveImageOnDocuments(completion: @escaping (Bool) -> Void) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         // choose a name for your image
         let fileName = "image.jpg"
@@ -143,8 +151,10 @@ extension UIImage {
                 // writes the image data to disk
                 try data.write(to: fileURL)
                 print("file saved")
+                completion(true)
             } catch {
                 print("error saving file:", error)
+                completion(false)
             }
         }
     }

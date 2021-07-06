@@ -14,14 +14,15 @@ public struct SignFieldView: View {
             Button {
                 showSignatureBox()
             } label: {
-                if signatureImage == nil {
+                if let signatureImage = signatureImage {
+                   signatureImage
+                       .resizable()
+                       .frame(maxWidth: 270, maxHeight: 88)
+                } else {
                     Text("Sign")
                         .font(.body)
                         .foregroundColor(Color(#colorLiteral(red: 0.9647058824, green: 0.7568627451, blue: 0.4470588235, alpha: 1)))
                         .frame(maxWidth: .infinity, maxHeight: 44)
-                } else {
-                    signatureImage
-                        .frame(maxWidth: .infinity, maxHeight: 88)
                 }
             }
             

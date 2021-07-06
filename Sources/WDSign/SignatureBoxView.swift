@@ -17,7 +17,7 @@ struct SignatureBoxView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     Button(action: {
-                        
+                        showModal.toggle()
                     }, label: {
                         Text("Cancel")
                             .frame(width: 85, height: 44, alignment: .center)
@@ -62,12 +62,13 @@ struct SignatureBoxView: View {
         }
     }
     
-    @Binding var canvas: PKCanvasView
+    @Binding public var canvas: PKCanvasView
+    @Binding public var showModal: Bool
 }
 
 struct SignatureBoxView_Previews: PreviewProvider {
     static var previews: some View {
-        SignatureBoxView(canvas: .constant(PKCanvasView()))
+        SignatureBoxView(canvas: .constant(PKCanvasView()), showModal: .constant(true))
             .previewLayout(.fixed(width: 1024, height: 768))
     }
 }

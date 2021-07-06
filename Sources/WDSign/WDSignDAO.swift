@@ -23,7 +23,7 @@ final class WDSignDAO: WDSignDAOProtocol {
                 Title,
                 A.Description,
                 SignDocumentText,
-                SDS.Description
+                SDS.Description,
                 PlaceholderSubscriber1,
                 PlaceholderSubscriber2,
                 PlaceholderSubscriber3,

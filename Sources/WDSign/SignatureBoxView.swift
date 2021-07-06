@@ -17,7 +17,7 @@ struct SignatureBoxView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     Button(action: {
-                        showModal.toggle()
+                        cancelSignature()
                     }, label: {
                         Text("Cancel")
                             .frame(width: 85, height: 44, alignment: .center)
@@ -27,7 +27,7 @@ struct SignatureBoxView: View {
                         .frame(maxWidth: .infinity, maxHeight: 44)
                     
                     Button(action: {
-                        
+                        saveSignature()
                     }, label: {
                         Text("Save")
                             .font(.headline)
@@ -49,7 +49,7 @@ struct SignatureBoxView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 Button(action: {
-                    
+                    eraseCanvas()
                 }, label: {
                     Text("Clear")
                         .frame(width: 85, height: 44, alignment: .center)

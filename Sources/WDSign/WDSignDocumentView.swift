@@ -8,7 +8,7 @@
 import SwiftUI
 import PencilKit
 
-public struct WDSignDocumentView: View {
+public struct WDSign: View {
     public var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -29,7 +29,8 @@ public struct WDSignDocumentView: View {
                         .frame(maxWidth: .infinity)
                     
                     Button(action: {
-                        
+                        let snapshot = documentView.snapshot()
+                        UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil)
                     }, label: {
                         Text("Save")
                             .font(.headline)
@@ -39,32 +40,19 @@ public struct WDSignDocumentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
                 
-                /// Document layout
-                ZStack {
-                    if let backgroundWatermark = documentLayoutInfo?.watermark {
-                        Image(backgroundWatermark)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    
-                    VStack(spacing: 0) {
-                        Text(documentLayoutInfo.documentText)
-                            .padding(.top, 100)
-                            .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
-                        
-                        SignFieldView(showModal: $showModal, signatureImage: $signatureImages)
-                            .padding(.bottom, 110)
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(#colorLiteral(red: 0.9333333333, green: 0.9529411765, blue: 0.9607843137, alpha: 1)))
+                documentView
+                
             }
-            
+            .navigationBarHidden(true)
+
             if showModal {
                 SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages)
             }
         }
-        .navigationBarHidden(true)
+    }
+    
+    public var documentView: some View {
+        WDSignDocumentView(documentLayoutInfo: documentLayoutInfo, showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex)
     }
     
     var documentLayoutInfo: SignDocumentLayoutInfo!
@@ -81,8 +69,56 @@ public struct WDSignDocumentView: View {
     }
 }
 
-struct WDSignDocumentView_Previews: PreviewProvider {
+struct WDSign_Previews: PreviewProvider {
     static var previews: some View {
-        WDSignDocumentView(documentID: 1)
+        WDSign(documentID: 1)
+    }
+}
+
+public struct WDSignDocumentView: View {
+    public var body: some View {
+        ZStack {
+            if let backgroundWatermark = documentLayoutInfo?.watermark {
+                Image(backgroundWatermark)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .aspectRatio(contentMode: .fit)
+            }
+            
+            VStack(spacing: 0) {
+                Text(documentLayoutInfo.documentText)
+                    .padding(.top, 100)
+                    .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
+                
+                SignFieldView(showModal: $showModal, signatureImage: $signatureImages)
+                    .padding(.bottom, 110)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(#colorLiteral(red: 0.9333333333, green: 0.9529411765, blue: 0.9607843137, alpha: 1)))
+    }
+    
+    var documentLayoutInfo: SignDocumentLayoutInfo!
+    @Binding public var showModal: Bool
+    @Binding public var canvas: PKCanvasView
+    @Binding public var signatureImages: Image?
+    @Binding public var selectedCanvasIndex: Int
+}
+
+
+
+extension View {
+    func snapshot() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+
+        let targetSize = controller.view.intrinsicContentSize
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
     }
 }

@@ -16,8 +16,7 @@ enum SubscriberType: String {
     case Form = "Formulário"
     case UserAndForm = "Usuário e formulário"
     case Subordinate = "Subordinado"
-    
-    
+
     var numberOfSignatureFields: Int {
         switch self {
         case .User: return 1
@@ -28,93 +27,6 @@ enum SubscriberType: String {
         case .UserAndForm: return 2
         case .Subordinate: return 1
         }
-    }
-}
-
-public struct WDSign: View {
-    public var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                /// Navigation  bar
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Text("Cancel")
-                            .font(.body)
-                            .foregroundColor(Color(#colorLiteral(red: 0.9176470588, green: 0.462745098, blue: 0.4078431373, alpha: 1)))
-                            .frame(width: 100, height: 44)
-                            .opacity(buttonsOpactity)
-                    })
-                    
-                    Text(documentLayoutInfo?.title ?? "")
-                        .font(.title2)
-                        .foregroundColor(Color(#colorLiteral(red: 0.2352941176, green: 0.4117647059, blue: 0.4980392157, alpha: 1)))
-                        .frame(maxWidth: .infinity)
-                    
-                    Button(action: {
-                        saveDocument()
-                    }, label: {
-                        Text("Save")
-                            .font(.headline)
-                            .foregroundColor(Color(#colorLiteral(red: 0.4549019608, green: 0.7333333333, blue: 0.7098039216, alpha: 1)))
-                            .frame(width: 100, height: 44)
-                            .opacity(buttonsOpactity)
-                    })
-                }
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                
-                documentView
-                
-            }
-            .navigationBarHidden(true)
-
-            if showModal {
-                SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages)
-            }
-        }
-    }
-    
-    public var documentView: some View {
-        WDSignDocumentView(documentLayoutInfo: documentLayoutInfo, showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex)
-    }
-    
-    var documentLayoutInfo: SignDocumentLayoutInfo!
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State public var showModal = false
-    @State public var canvas = PKCanvasView()
-    @State public var signatureImages: Image?
-    @State public var selectedCanvasIndex: Int = 0
-    @State var buttonsOpactity: Double = 1
-    
-    public init(documentID: Int) {
-        self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
-    }
-    
-    private func saveDocument() {
-        withAnimation {
-            buttonsOpactity = 0
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self
-                .snapshot()
-                .saveImageOnDocuments() { segue in
-                    if segue {
-                        withAnimation {
-                            buttonsOpactity = 1
-                        }
-                    }
-                }
-        }
-    }
-}
-
-struct WDSign_Previews: PreviewProvider {
-    static var previews: some View {
-        WDSign(documentID: 1)
     }
 }
 
@@ -133,7 +45,7 @@ public struct WDSignDocumentView: View {
                     .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
                 
                 ForEach(0..<getNumberOfSignatureFields(), id: \.self) { index in
-                    SignFieldView(showModal: $showModal, signatureImage: $signatureImages)
+                    SignFieldView(showModal: $showModal, signatureImage: $signatureImages, placeholderDataFor: placeholders[index])
                         .padding(.bottom, 110)
                 }
             }
@@ -143,6 +55,7 @@ public struct WDSignDocumentView: View {
     }
     
     var documentLayoutInfo: SignDocumentLayoutInfo!
+    var placeholders: Array<String>
     @Binding public var showModal: Bool
     @Binding public var canvas: PKCanvasView
     @Binding public var signatureImages: Image?

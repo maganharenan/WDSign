@@ -24,6 +24,7 @@ public struct SignFieldView: View {
                         .font(.body)
                         .foregroundColor(Color(#colorLiteral(red: 0.9647058824, green: 0.7568627451, blue: 0.4470588235, alpha: 1)))
                         .frame(maxWidth: .infinity, maxHeight: 44)
+                        .frame(height: 88, alignment: .bottom)
                 }
             }
             
@@ -34,7 +35,7 @@ public struct SignFieldView: View {
                 .font(.system(size: 15, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("Role")
+            Text(placeholderDataFor)
                 .font(.footnote)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -47,6 +48,7 @@ public struct SignFieldView: View {
 
     @Binding var showModal: Bool
     @Binding public var signatureImage: Image?
+    var placeholderDataFor: String
     
     private func showSignatureBox() {
         showModal.toggle()
@@ -55,13 +57,6 @@ public struct SignFieldView: View {
 
 struct SignFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SignFieldView(showModal: .constant(false), signatureImage: .constant(Image(systemName: "")))
-    }
-}
-
-extension PKDrawing {
-    
-    func isEmpty() -> Bool {
-        return strokes.isEmpty
+        SignFieldView(showModal: .constant(false), signatureImage: .constant(Image(systemName: "")), placeholderDataFor: "")
     }
 }

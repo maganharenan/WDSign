@@ -8,6 +8,29 @@
 import SwiftUI
 import PencilKit
 
+enum SubscriberType: String {
+    case User = "Usuário"
+    case Manager = "Gerente"
+    case UserAndManager = "Usuário e gerente"
+    case UserAndSubordinate = "Usuário e subordinado"
+    case Form = "Formulário"
+    case UserAndForm = "Usuário e formulário"
+    case Subordinate = "Subordinado"
+    
+    
+    var numberOfSignatureFields: Int {
+        switch self {
+        case .User: return 1
+        case .Manager: return 1
+        case .UserAndManager: return 2
+        case .UserAndSubordinate: return 2
+        case .Form: return 1
+        case .UserAndForm: return 2
+        case .Subordinate: return 1
+        }
+    }
+}
+
 public struct WDSign: View {
     public var body: some View {
         ZStack {
@@ -109,8 +132,10 @@ public struct WDSignDocumentView: View {
                     .padding(.top, 100)
                     .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
                 
-                SignFieldView(showModal: $showModal, signatureImage: $signatureImages)
-                    .padding(.bottom, 110)
+                ForEach(0..<getNumberOfSignatureFields(), id: \.self) { index in
+                    SignFieldView(showModal: $showModal, signatureImage: $signatureImages)
+                        .padding(.bottom, 110)
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -122,6 +147,10 @@ public struct WDSignDocumentView: View {
     @Binding public var canvas: PKCanvasView
     @Binding public var signatureImages: Image?
     @Binding public var selectedCanvasIndex: Int
+    
+    private func getNumberOfSignatureFields() -> Int {
+        SubscriberType.init(rawValue: documentLayoutInfo.subscriberTypeDescription)?.numberOfSignatureFields ?? 1
+    }
 }
 
 

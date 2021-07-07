@@ -23,7 +23,7 @@ public struct WDSign: View {
                             .opacity(buttonsOpactity)
                     })
                     
-                    Text(documentLayoutInfo?.title ?? "")
+                    Text(viewModel.getDocumentLayoutInfo().title)
                         .font(.title2)
                         .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .frame(maxWidth: .infinity)
@@ -53,12 +53,11 @@ public struct WDSign: View {
     }
     
     public var documentView: some View {
-        DocumentView(documentLayoutInfo: documentLayoutInfo, placeholders: handlePlaceholders(), showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex)
+        DocumentView(viewModel: viewModel, showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex)
     }
-    
-    var documentLayoutInfo: SignDocumentLayoutInfo!
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var viewModel: WDSignViewModel
     
     @State public var showModal = false
     @State public var canvas = PKCanvasView()
@@ -66,25 +65,10 @@ public struct WDSign: View {
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
     
-    public init(documentID: Int) {
-        self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
+    public init(documentID: Int, customerFormRecordID: String?) {
+        self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID)
     }
-    
-    private func handlePlaceholders() -> Array<String> {
-        var placeholders = Array<String>()
-        
-        guard let placeholder1 = documentLayoutInfo.placeholderSubscriber1 else { return [] }
-        placeholders.append(placeholder1)
-        
-        guard let placeholder2 = documentLayoutInfo.placeholderSubscriber2 else { return placeholders }
-        placeholders.append(placeholder2)
-        
-        guard let placeholder3 = documentLayoutInfo.placeholderSubscriber3 else { return placeholders }
-        placeholders.append(placeholder3)
-        
-        return placeholders
-    }
-    
+ 
     private func saveDocument() {
         withAnimation {
             buttonsOpactity = 0
@@ -106,6 +90,6 @@ public struct WDSign: View {
 
 struct WDSign_Previews: PreviewProvider {
     static var previews: some View {
-        WDSign(documentID: 1)
+        WDSign(documentID: 1, customerFormRecordID: nil)
     }
 }

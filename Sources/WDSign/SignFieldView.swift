@@ -31,15 +31,15 @@ public struct SignFieldView: View {
             Rectangle()
                 .frame(height: 3)
 
-            Text("Name")
+            Text(subscriber.name)
                 .font(.system(size: 15, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("Role")
+            Text(subscriber.jobTitle)
                 .font(.footnote)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("Document")
+            Text(subscriber.document)
                 .font(.footnote)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -48,7 +48,7 @@ public struct SignFieldView: View {
 
     @Binding var showModal: Bool
     @Binding public var signatureImage: Image?
-    var placeholderDataFor: String
+    var subscriber: SubscriberData
     
     private func showSignatureBox() {
         showModal.toggle()
@@ -57,6 +57,6 @@ public struct SignFieldView: View {
 
 struct SignFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SignFieldView(showModal: .constant(false), signatureImage: .constant(Image(systemName: "")), placeholderDataFor: "")
+        SignFieldView(showModal: .constant(false), signatureImage: .constant(Image(systemName: "")), subscriber: SubscriberData(name: "", jobTitle: "", document: ""))
     }
 }

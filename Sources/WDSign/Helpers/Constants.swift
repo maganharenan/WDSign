@@ -62,4 +62,11 @@ final class Constants {
             }
         }
     }
+    
+    enum PlaceholderSubscriberType: String {
+        case User = "{USER_ID}"
+        case Manager = "{USER_MANAGER_ID}"
+        case Subordinate = "{USER_SUBORDINATE_ID}"
+        case Form = "{FORM_RECORD_ID}"
+    }
 }

@@ -20,10 +20,13 @@ struct SignatureBoxView: View {
                         cancelSignature()
                     }, label: {
                         Text("Cancel")
+                            .font(.body)
+                            .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
                             .frame(width: 85, height: 44, alignment: .center)
                     })
                     
                     Text("Sign here")
+                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .frame(maxWidth: .infinity, maxHeight: 44)
                     
                     Button(action: {
@@ -31,6 +34,7 @@ struct SignatureBoxView: View {
                     }, label: {
                         Text("Save")
                             .font(.headline)
+                            .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
                             .frame(width: 85, height: 44, alignment: .center)
                     })
                 }
@@ -43,6 +47,7 @@ struct SignatureBoxView: View {
                     
                     Rectangle()
                         .frame(width: 456, height: 3, alignment: .center)
+                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .padding(.bottom, 28)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
@@ -52,6 +57,8 @@ struct SignatureBoxView: View {
                     eraseCanvas()
                 }, label: {
                     Text("Clear")
+                        .font(.body)
+                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .frame(width: 85, height: 44, alignment: .center)
                 })
                 .frame(maxWidth: .infinity, alignment: .trailing)

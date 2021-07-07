@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Database.swift
 //  
 //
 //  Created by Renan Maganha on 21/06/21.
@@ -8,7 +8,7 @@
 import Foundation
 import SQLite
 
-class Database {
+final class Database {
     static let instance = Database()
     var db: Connection!
     

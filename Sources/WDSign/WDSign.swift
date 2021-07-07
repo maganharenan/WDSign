@@ -11,7 +11,7 @@ public struct WDSign: View {
                     }, label: {
                         Text("Cancel")
                             .font(.body)
-                            .foregroundColor(Color(#colorLiteral(red: 0.9176470588, green: 0.462745098, blue: 0.4078431373, alpha: 1)))
+                            .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
                             .frame(width: 100, height: 44)
                             .opacity(buttonsOpactity)
                     })
@@ -26,7 +26,7 @@ public struct WDSign: View {
                     }, label: {
                         Text("Save")
                             .font(.headline)
-                            .foregroundColor(Color(#colorLiteral(red: 0.4549019608, green: 0.7333333333, blue: 0.7098039216, alpha: 1)))
+                            .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
                             .frame(width: 100, height: 44)
                             .opacity(buttonsOpactity)
                     })

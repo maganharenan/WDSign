@@ -74,7 +74,24 @@ final class FormPlaceholderFactory: SubscriberPlaceholderFactory {
     }
 }
 
-//User
+final class UserPlaceholderFactory: SubscriberPlaceholderFactory {
+    func createSubscriber() -> SubscriberData {
+        return SubscriberData(name: getSubscriberName(), jobTitle: getSubscriberjobTitle(), document: getSubscriberDocument())
+    }
+    
+    func getSubscriberName() -> String {
+        return SystemParameterDAO.instance.getSystemParameter(with: .Username)?.parameterValue ?? ""
+    }
+    
+    func getSubscriberjobTitle() -> String {
+        return SystemParameterDAO.instance.getSystemParameter(with: .UserJobTitle)?.parameterValue ?? ""
+    }
+    
+    func getSubscriberDocument() -> String {
+        return SystemParameterDAO.instance.getSystemParameter(with: .UserDocument)?.parameterValue ?? ""
+    }
+}
+
 //Manager
 //Subordinate
 

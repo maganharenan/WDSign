@@ -31,6 +31,9 @@ final class Constants {
         case Color19 = "color_19"
         case Color20 = "color_20"
         case Color21 = "color_21"
+        case Username = "user_name"
+        case UserJobTitle = "user_job_title"
+        case UserDocument = "user_document"
     }
     
     enum SystemResources: String {

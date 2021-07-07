@@ -14,18 +14,21 @@ public struct SignFieldView: View {
             Button {
                 showSignatureBox()
             } label: {
-                if let signatureImage = signatureImage {
-                   signatureImage
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 270, maxHeight: 88)
-                } else {
-                    Text(Constants.SystemResources.Sign.translateResource())
-                        .font(.body)
-                        .foregroundColor(AppColorsDAO.instance.system_color_16.getColorFromHex())
-                        .frame(maxWidth: .infinity, maxHeight: 44)
-                        .frame(height: 88, alignment: .bottom)
+                HStack {
+                    if let signatureImage = signatureImage {
+                        signatureImage
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: 270, maxHeight: 88)
+                    } else {
+                        Text(Constants.SystemResources.Sign.translateResource())
+                            .font(.body)
+                            .foregroundColor(AppColorsDAO.instance.system_color_16.getColorFromHex())
+                            .frame(maxWidth: .infinity, maxHeight: 44)
+                        
+                    }
                 }
+                .frame(height: 88, alignment: .bottom)
             }
             
             Rectangle()

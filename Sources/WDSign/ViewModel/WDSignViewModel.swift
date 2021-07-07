@@ -34,13 +34,13 @@ class WDSignViewModel: ObservableObject {
     private func handlePlaceholders() -> Array<String> {
         var placeholders = Array<String>()
         
-        guard let placeholder1 = documentLayoutInfo.placeholderSubscriber1 else { return [] }
+        guard let placeholder1 = documentLayoutInfo.placeholderSubscriber1, !placeholder1.isEmpty else { return [] }
         placeholders.append(placeholder1)
         
-        guard let placeholder2 = documentLayoutInfo.placeholderSubscriber2 else { return placeholders }
+        guard let placeholder2 = documentLayoutInfo.placeholderSubscriber2, !placeholder2.isEmpty else { return placeholders }
         placeholders.append(placeholder2)
         
-        guard let placeholder3 = documentLayoutInfo.placeholderSubscriber3 else { return placeholders }
+        guard let placeholder3 = documentLayoutInfo.placeholderSubscriber3, !placeholder3.isEmpty else { return placeholders }
         placeholders.append(placeholder3)
         
         return placeholders

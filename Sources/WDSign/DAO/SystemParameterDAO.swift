@@ -38,7 +38,7 @@ final class SystemParameterDAO {
         do {
             parameters = try Database.instance.db.prepare(query).map { row in
                 return SystemParameter(
-                    id: row[0] as! Int,
+                    id: Int(row[0] as! Int64),
                     formId: row[1] as? Int,
                     parameterKey: row[2] as! String,
                     parameterValue: row[3] as! String)

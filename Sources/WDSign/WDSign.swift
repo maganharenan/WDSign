@@ -18,7 +18,7 @@ public struct WDSign: View {
                     
                     Text(documentLayoutInfo?.title ?? "")
                         .font(.title2)
-                        .foregroundColor(Color(#colorLiteral(red: 0.2352941176, green: 0.4117647059, blue: 0.4980392157, alpha: 1)))
+                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .frame(maxWidth: .infinity)
                     
                     Button(action: {

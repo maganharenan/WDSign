@@ -12,7 +12,8 @@ struct SignatureBoxView: View {
     var body: some View {
         ZStack{
             Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-                .opacity(0.1)
+                .opacity(showModal ? 0.1 : 0)
+                .animation(.easeInOut)
             
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
@@ -66,6 +67,8 @@ struct SignatureBoxView: View {
             .frame(width: 540, height: 343, alignment: .center)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .animation(.easeInOut)
+            .position(x: 0, y: showModal ? 0 : UIScreen.main.bounds.height)
         }
     }
     

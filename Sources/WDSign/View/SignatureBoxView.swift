@@ -10,7 +10,7 @@ import PencilKit
 
 struct SignatureBoxView: View {
     var body: some View {
-        ZStack{
+        ZStack(alignment: .center){
             Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
                 .opacity(showModal ? 0.1 : 0)
                 .animation(.easeInOut)

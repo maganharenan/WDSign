@@ -88,7 +88,7 @@ final class SubscriberDAO {
         do {
             try Database.instance.db.prepare(query).forEach { row in
                 if formID == nil {
-                    formID = row[0] as? Int
+                    formID = Int(row[0] as! Int64)
                 }
             }
         } catch {

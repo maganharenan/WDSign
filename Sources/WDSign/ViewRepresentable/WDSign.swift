@@ -1,3 +1,10 @@
+//
+//  WDSign.swift
+//
+//
+//  Created by Renan Maganha on 21/06/21.
+//
+
 import SwiftUI
 import PencilKit
 
@@ -9,7 +16,7 @@ public struct WDSign: View {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }, label: {
-                        Text("Cancel")
+                        Text(Constants.SystemResources.Cancel.translateResource())
                             .font(.body)
                             .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
                             .frame(width: 100, height: 44)
@@ -24,7 +31,7 @@ public struct WDSign: View {
                     Button(action: {
                         saveDocument()
                     }, label: {
-                        Text("Save")
+                        Text(Constants.SystemResources.Save.translateResource())
                             .font(.headline)
                             .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
                             .frame(width: 100, height: 44)
@@ -32,6 +39,7 @@ public struct WDSign: View {
                     })
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
+                .background(Color.white)
                 
                 documentView
                 
@@ -45,7 +53,7 @@ public struct WDSign: View {
     }
     
     public var documentView: some View {
-        WDSignDocumentView(documentLayoutInfo: documentLayoutInfo, placeholders: handlePlaceholders(), showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex)
+        DocumentView(documentLayoutInfo: documentLayoutInfo, placeholders: handlePlaceholders(), showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex)
     }
     
     var documentLayoutInfo: SignDocumentLayoutInfo!

@@ -36,5 +36,30 @@ final class Constants {
     enum SystemResources: String {
         case Cancel = "cancel"
         case Save = "save"
+        case Sign = "sign"
+        case SignHere = "sign_here"
+        case Clean = "clean"
+    }
+    
+    enum SubscriberType: String {
+        case User = "Usuário"
+        case Manager = "Gerente"
+        case UserAndManager = "Usuário e gerente"
+        case UserAndSubordinate = "Usuário e subordinado"
+        case Form = "Formulário"
+        case UserAndForm = "Usuário e formulário"
+        case Subordinate = "Subordinado"
+
+        var numberOfSignatureFields: Int {
+            switch self {
+            case .User: return 1
+            case .Manager: return 1
+            case .UserAndManager: return 2
+            case .UserAndSubordinate: return 2
+            case .Form: return 1
+            case .UserAndForm: return 2
+            case .Subordinate: return 1
+            }
+        }
     }
 }

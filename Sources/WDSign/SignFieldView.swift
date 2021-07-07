@@ -20,9 +20,9 @@ public struct SignFieldView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 270, maxHeight: 88)
                 } else {
-                    Text("Sign")
+                    Text(Constants.SystemResources.Sign.translateResource())
                         .font(.body)
-                        .foregroundColor(Color(#colorLiteral(red: 0.9647058824, green: 0.7568627451, blue: 0.4470588235, alpha: 1)))
+                        .foregroundColor(AppColorsDAO.instance.system_color_16.getColorFromHex())
                         .frame(maxWidth: .infinity, maxHeight: 44)
                         .frame(height: 88, alignment: .bottom)
                 }
@@ -35,7 +35,7 @@ public struct SignFieldView: View {
                 .font(.system(size: 15, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(placeholderDataFor)
+            Text("Role")
                 .font(.footnote)
                 .frame(maxWidth: .infinity, alignment: .leading)
             

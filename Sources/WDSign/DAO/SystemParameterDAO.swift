@@ -9,12 +9,11 @@ import Foundation
 
 protocol SystemParameterDAOProtocol {
     init()
-    func getSystemParameter(with key: String, formID: Int?) -> SystemParameter
+    func getSystemParameter(with key: Constants.SystemParameters, formID: Int?) -> SystemParameter?
 }
 
-final class SystemParameterDAO {
+final class SystemParameterDAO: SystemParameterDAOProtocol {
     static let instance = SystemParameterDAO()
-    
     private var parameters: Array<SystemParameter>!
     
     internal init() {
@@ -23,7 +22,7 @@ final class SystemParameterDAO {
     
     public func getSystemParameter(with key: Constants.SystemParameters, formID: Int? = nil) -> SystemParameter? {
         if let formID = formID {
-            return parameters.first(where: { $0.parameterKey == key.rawValue && $0.formId == formID })
+            return parameters.first(where: { $0.parameterKey == key.rawValue && $0.formID == formID })
         } else {
             return parameters.first(where: { $0.parameterKey == key.rawValue })
         }
@@ -39,7 +38,7 @@ final class SystemParameterDAO {
             parameters = try Database.instance.db.prepare(query).map { row in
                 return SystemParameter(
                     id: Int(row[0] as! Int64),
-                    formId: row[1] as? Int,
+                    formID: row[1] as? Int,
                     parameterKey: row[2] as! String,
                     parameterValue: row[3] as! String)
             }

@@ -1,5 +1,5 @@
 //
-//  SystemParameter.swift
+//  SystemResource.swift
 //  
 //
 //  Created by Renan Maganha on 07/07/21.
@@ -7,26 +7,26 @@
 
 import Foundation
 
-struct SystemParameter : Codable {
+struct SystemResource: Codable {
     var id: Int
+    var resourceKey: String
     var formID: Int?
-    var parameterKey: String
-    var parameterValue: String
+    var value: String
     
     enum CodingKeys: String, CodingKey {
         case id = "ID"
+        case resourceKey = "ResourceKey"
         case formID = "FormID"
-        case parameterKey = "Parameterkey"
-        case parameterValue = "ParameterValue"
+        case value = "Value"
     }
 }
 
-extension SystemParameter {
+extension SystemResource {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decode(Int.self, forKey: .id)
         formID = try? values.decode(Int.self, forKey: .formID)
-        parameterKey = try values.decode(String.self, forKey: .parameterKey)
-        parameterValue  = try values.decode(String.self, forKey: .parameterValue)
+        value = try values.decode(String.self, forKey: .value)
+        resourceKey = try values.decode(String.self, forKey: .resourceKey)
     }
 }

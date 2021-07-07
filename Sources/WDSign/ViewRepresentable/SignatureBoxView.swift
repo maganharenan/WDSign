@@ -1,8 +1,8 @@
 //
-//  SwiftUIView.swift
+//  SignatureBoxVIew.swift
 //  
 //
-//  Created by Nuxen on 05/07/21.
+//  Created by Renan Maganha on 05/07/21.
 //
 
 import SwiftUI
@@ -19,27 +19,27 @@ struct SignatureBoxView: View {
                     Button(action: {
                         cancelSignature()
                     }, label: {
-                        Text("Cancel")
+                        Text(Constants.SystemResources.Cancel.translateResource())
                             .font(.body)
                             .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
                             .frame(width: 85, height: 44, alignment: .center)
                     })
                     
-                    Text("Sign here")
+                    Text(Constants.SystemResources.SignHere.translateResource())
                         .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .frame(maxWidth: .infinity, maxHeight: 44)
                     
                     Button(action: {
                         saveSignature()
                     }, label: {
-                        Text("Save")
+                        Text(Constants.SystemResources.Save.translateResource())
                             .font(.headline)
                             .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
                             .frame(width: 85, height: 44, alignment: .center)
                     })
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
-                .background(Color(#colorLiteral(red: 0.8666666667, green: 0.9058823529, blue: 0.9254901961, alpha: 1)))
+                .background(AppColorsDAO.instance.system_color_3.getColorFromHex())
                 
                 ZStack {
                     SignatureCanvas(canvas: $canvas)
@@ -56,7 +56,7 @@ struct SignatureBoxView: View {
                 Button(action: {
                     eraseCanvas()
                 }, label: {
-                    Text("Clear")
+                    Text(Constants.SystemResources.Clean.translateResource())
                         .font(.body)
                         .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .frame(width: 85, height: 44, alignment: .center)
@@ -102,24 +102,5 @@ struct SignatureBoxView_Previews: PreviewProvider {
     static var previews: some View {
         SignatureBoxView(canvas: .constant(PKCanvasView()), showModal: .constant(true), signatureImage: .constant(Image(systemName: "")))
             .previewLayout(.fixed(width: 1024, height: 768))
-    }
-}
-
-public struct SignatureCanvas: UIViewRepresentable {
-    @Binding public var canvas: PKCanvasView
-
-    public var ink: PKInkingTool {
-        PKInkingTool(.pen, color: .black, width: 7)
-    }
-
-    public func makeUIView(context: Context) -> PKCanvasView {
-        canvas.drawingPolicy = .anyInput
-        canvas.tool = ink
-        canvas.backgroundColor = .white
-        return canvas
-    }
-
-    public func updateUIView(_ uiView: PKCanvasView, context: Context) {
-        uiView.tool = ink
     }
 }

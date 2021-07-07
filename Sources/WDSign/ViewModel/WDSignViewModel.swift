@@ -15,6 +15,7 @@ class WDSignViewModel: ObservableObject {
     
     init(documentID: Int, customerFormRecordID: String?) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
+        self.customerFormRecordID = customerFormRecordID
         self.placeholders = handlePlaceholders()
         self.handleSubscribers()
     }

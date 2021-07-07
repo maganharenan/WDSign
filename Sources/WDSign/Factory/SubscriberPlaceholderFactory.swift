@@ -19,6 +19,10 @@ final class SubscriberFactory {
     private var placeholderType: Constants.PlaceholderSubscriberType!
     private var subscribers = Array<SubscriberData>()
     
+    init(customerFormRecordID: String?) {
+        self.customerFormRecordID = customerFormRecordID
+    }
+    
     public func getSubscribersList() -> Array<SubscriberData> {
         return subscribers
     }

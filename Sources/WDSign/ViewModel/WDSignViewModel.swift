@@ -48,7 +48,7 @@ class WDSignViewModel: ObservableObject {
     }
     
     private func handleSubscribers() {
-        let factory = SubscriberFactory()
+        let factory = SubscriberFactory(customerFormRecordID: customerFormRecordID)
         
         subscribers = factory
             .createSubscribers(placeholders: placeholders, customerFormRecordID: customerFormRecordID)

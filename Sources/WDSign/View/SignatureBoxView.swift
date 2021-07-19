@@ -94,6 +94,7 @@ struct SignatureBoxView: View {
     private func cancelSignature() {
         canvas.drawing = storedCanvas
         showModal.toggle()
+        dragGesturePosition = 0
     }
     
     private func saveSignature() {
@@ -108,8 +109,10 @@ struct SignatureBoxView: View {
             .onChanged { value in
                 if value.translation.height > 0 {
                     dragGesturePosition += (value.translation.height / 10)
-                    if value.translation.height >= 400 {
+                    if value.translation.height >= screen.height / 4 {
                         cancelSignature()
+                    } else {
+                        dragGesturePosition = 0
                     }
                 }
             }

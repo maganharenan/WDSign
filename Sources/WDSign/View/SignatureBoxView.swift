@@ -67,7 +67,7 @@ struct SignatureBoxView: View {
             .frame(width: 540, height: 343, alignment: .center)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .position(x: screen.width / 2, y: showModal ? screen.height / 2 : UIScreen.main.bounds.height)
+            .position(x: screen.width / 2, y: showModal ? screen.height / 2 : UIScreen.main.bounds.height + 200)
             .animation(.easeInOut)
         }
     }

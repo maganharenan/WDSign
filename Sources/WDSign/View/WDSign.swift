@@ -10,7 +10,7 @@ import PencilKit
 
 public struct WDSign: View {
     public var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             VStack(spacing: 0) {
                 HStack {
                     Button(action: {
@@ -46,9 +46,8 @@ public struct WDSign: View {
             }
             .navigationBarHidden(true)
 
-            //if showModal {
-                SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages)
-            //}
+            SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages)
+                .gesture(returnGesture())
         }
     }
     
@@ -85,6 +84,15 @@ public struct WDSign: View {
                     }
                 }
         }
+    }
+    
+    func returnGesture() -> some Gesture {
+        DragGesture()
+            .onChanged { value in
+                if value.translation.height >= 400 {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }
     }
 }
 

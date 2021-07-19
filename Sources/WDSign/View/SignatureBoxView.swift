@@ -92,6 +92,7 @@ struct SignatureBoxView: View {
     }
     
     private func cancelSignature() {
+        canvas.drawing = PKDrawing()
         canvas.drawing = storedCanvas
         showModal.toggle()
         dragGesturePosition = 0
@@ -108,8 +109,8 @@ struct SignatureBoxView: View {
         DragGesture()
             .onChanged { value in
                 if value.translation.height > 0 {
-                    dragGesturePosition += (value.translation.height / 10)
-                    if value.translation.height >= screen.height / 4 {
+                    dragGesturePosition += (value.translation.height / 4)
+                    if dragGesturePosition >= screen.height / 4 {
                         cancelSignature()
                     } else {
                         dragGesturePosition = 0

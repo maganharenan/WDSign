@@ -41,6 +41,7 @@ struct SignatureBoxView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
                 .background(AppColorsDAO.instance.system_color_3.getColorFromHex())
+                .gesture(returnGesture())
                 
                 ZStack {
                     SignatureCanvas(canvas: $canvas)
@@ -67,7 +68,7 @@ struct SignatureBoxView: View {
             .frame(width: 540, height: 343, alignment: .center)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .position(x: screen.width / 2, y: showModal ? screen.height / 2 : UIScreen.main.bounds.height + 200)
+            .position(x: screen.width / 2, y: showModal ? screen.height / 2 + dragGesturePosition : UIScreen.main.bounds.height + 200)
             .animation(.easeInOut)
         }
     }
@@ -75,6 +76,7 @@ struct SignatureBoxView: View {
     @Binding public var canvas: PKCanvasView
     @Binding public var showModal: Bool
     @Binding public var signatureImage: Image?
+    @State var dragGesturePosition: CGFloat = 0
     var storedCanvas: PKDrawing
     private var screen = UIScreen.main.bounds
     
@@ -99,6 +101,16 @@ struct SignatureBoxView: View {
         signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
         
         showModal.toggle()
+    }
+    
+    func returnGesture() -> some Gesture {
+        DragGesture()
+            .onChanged { value in
+                dragGesturePosition += value.translation.height
+                if value.translation.height >= 400 {
+                    cancelSignature()
+                }
+            }
     }
 }
 

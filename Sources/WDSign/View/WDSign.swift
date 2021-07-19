@@ -47,7 +47,6 @@ public struct WDSign: View {
             .navigationBarHidden(true)
 
             SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages)
-                .gesture(returnGesture())
         }
     }
     
@@ -84,15 +83,6 @@ public struct WDSign: View {
                     }
                 }
         }
-    }
-    
-    func returnGesture() -> some Gesture {
-        DragGesture()
-            .onChanged { value in
-                if value.translation.height >= 400 {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            }
     }
 }
 

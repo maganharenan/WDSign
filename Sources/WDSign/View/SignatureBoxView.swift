@@ -15,6 +15,10 @@ struct SignatureBoxView: View {
                 .opacity(showModal ? 0.1 : 0)
                 .animation(.easeInOut)
             
+            Text("\(dragGesturePosition)")
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     Button(action: {

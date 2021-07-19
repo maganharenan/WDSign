@@ -67,8 +67,8 @@ struct SignatureBoxView: View {
             .frame(width: 540, height: 343, alignment: .center)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .position(x: screen.width / 2, y: showModal ? screen.height / 2 : UIScreen.main.bounds.height)
             .animation(.easeInOut)
-            .position(x: 0, y: showModal ? 0 : UIScreen.main.bounds.height)
         }
     }
     
@@ -76,6 +76,7 @@ struct SignatureBoxView: View {
     @Binding public var showModal: Bool
     @Binding public var signatureImage: Image?
     var storedCanvas: PKDrawing
+    private var screen = UIScreen.main.bounds
     
     init(canvas: Binding<PKCanvasView>, showModal: Binding<Bool>, signatureImage: Binding<Image?>) {
         self._canvas = canvas

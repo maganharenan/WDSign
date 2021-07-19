@@ -46,9 +46,9 @@ public struct WDSign: View {
             }
             .navigationBarHidden(true)
 
-            if showModal {
+            //if showModal {
                 SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages)
-            }
+            //}
         }
     }
     

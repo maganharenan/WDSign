@@ -114,11 +114,9 @@ struct SignatureBoxView: View {
             .onChanged { value in
                 if value.translation.height > 0 {
                     dragGesturePosition += (value.translation.height / 2)
-//                    if dragGesturePosition >= screen.height / 4 {
-//                        cancelSignature()
-//                    } else {
-//                        dragGesturePosition = 0
-//                    }
+                    if dragGesturePosition >= 300 {
+                        cancelSignature()
+                    }
                 }
             }
             .onEnded { value in

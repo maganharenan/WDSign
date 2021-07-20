@@ -121,6 +121,9 @@ struct SignatureBoxView: View {
 //                    }
                 }
             }
+            .onEnded { value in
+                dragGesturePosition = .zero
+            }
     }
 }
 

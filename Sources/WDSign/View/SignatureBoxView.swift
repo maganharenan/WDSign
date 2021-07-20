@@ -112,8 +112,8 @@ struct SignatureBoxView: View {
     func returnGesture() -> some Gesture {
         DragGesture()
             .onChanged { value in
-                if value.translation.height > 0 {
-                    dragGesturePosition += (value.translation.height / 2)
+                if value.translation.height / 10 > 0 {
+                    dragGesturePosition += (value.translation.height / 10)
                     if dragGesturePosition >= 300 {
                         cancelSignature()
                     }

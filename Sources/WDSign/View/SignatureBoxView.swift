@@ -72,7 +72,7 @@ struct SignatureBoxView: View {
             .frame(width: 540, height: 343, alignment: .center)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .position(x: screen.width / 2, y: showModal ? screen.height / 2 + dragGesturePosition : UIScreen.main.bounds.height + 200)
+            .position(x: screen.width / 2, y: showModal ? (screen.height / 2) + dragGesturePosition : UIScreen.main.bounds.height + 200)
             .animation(.easeInOut)
         }
     }
@@ -113,7 +113,7 @@ struct SignatureBoxView: View {
         DragGesture()
             .onChanged { value in
                 if value.translation.height > 0 {
-                    dragGesturePosition += value.translation.height
+                    dragGesturePosition += (value.translation.height / 2)
 //                    if dragGesturePosition >= screen.height / 4 {
 //                        cancelSignature()
 //                    } else {

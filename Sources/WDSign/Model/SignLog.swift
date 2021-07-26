@@ -8,12 +8,12 @@
 import Foundation
 
 struct SignLog: Hashable, Codable {
-    let id: String
-    let signDocument: Int
-    let signDateTime: String
-    let userID: Int
-    let secondaryUserID: Int?
-    let formRecordID: String?
+    var id: String
+    var signDocument: Int
+    var signDateTime: String
+    var userID: Int
+    var secondaryUserID: Int?
+    var formRecordID: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "ID"

@@ -24,3 +24,15 @@ struct SignLog: Hashable, Codable {
         case formRecordID = "FormRecordID"
     }
 }
+
+extension SignLog {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(String.self, forKey: .id)
+        signDocument = try values.decode(Int.self, forKey: .signDocument)
+        signDateTime = try values.decode(String.self, forKey: .signDateTime)
+        userID = try values.decode(Int.self, forKey: .userID)
+        secondaryUserID = try? values.decode(Int.self, forKey: .secondaryUserID)
+        formRecordID = try? values.decode(String.self, forKey: .formRecordID)
+    }
+}

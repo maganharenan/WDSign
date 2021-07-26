@@ -9,7 +9,7 @@ import Foundation
 
 struct SignLog: Hashable, Codable {
     var id: String
-    var signDocument: Int
+    var signDocumentID: Int
     var signDateTime: String
     var userID: Int
     var secondaryUserID: Int?
@@ -17,7 +17,7 @@ struct SignLog: Hashable, Codable {
     
     enum CodingKeys: String, CodingKey {
         case id = "ID"
-        case signDocument = "SignDocument"
+        case signDocumentID = "SignDocumentID"
         case signDateTime = "SignDateTime"
         case userID = "UserID"
         case secondaryUserID = "SecondaryUserID"
@@ -29,7 +29,7 @@ extension SignLog {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decode(String.self, forKey: .id)
-        signDocument = try values.decode(Int.self, forKey: .signDocument)
+        signDocumentID = try values.decode(Int.self, forKey: .signDocumentID)
         signDateTime = try values.decode(String.self, forKey: .signDateTime)
         userID = try values.decode(Int.self, forKey: .userID)
         secondaryUserID = try? values.decode(Int.self, forKey: .secondaryUserID)

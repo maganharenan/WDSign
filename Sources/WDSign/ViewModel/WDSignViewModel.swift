@@ -57,7 +57,7 @@ class WDSignViewModel: ObservableObject {
     
     public func handleSignaturePersistence(id: String) {
         let signLog = SignLog(id: id,
-                              signDocument: documentLayoutInfo.id,
+                              signDocumentID: documentLayoutInfo.id,
                               signDateTime: "",
                               userID: 0,
                               secondaryUserID: nil,

@@ -8,10 +8,10 @@
 import SwiftUI
 
 extension UIImage {
-    func saveImageOnDocuments(completion: @escaping (Bool) -> Void) {
+    func saveImageOnDocuments(imageName: String, completion: @escaping (Bool) -> Void) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         // choose a name for your image
-        let fileName = "image.jpg"
+        let fileName = "\(imageName).png"
         // create the destination file url to save your image
         let fileURL = documentsDirectory.appendingPathComponent(fileName)
         // get your UIImage jpeg data representation and check if the destination file url already exists

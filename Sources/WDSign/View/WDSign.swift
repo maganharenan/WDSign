@@ -73,15 +73,17 @@ public struct WDSign: View {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            let signLogID = UUID().uuidString
             self
                 .snapshot()
-                .saveImageOnDocuments() { segue in
+                .saveImageOnDocuments(imageName: signLogID) { segue in
                     if segue {
                         withAnimation {
                             buttonsOpactity = 1
                         }
                     }
                 }
+            viewModel.handleSignaturePersistence(id: signLogID)
         }
     }
 }

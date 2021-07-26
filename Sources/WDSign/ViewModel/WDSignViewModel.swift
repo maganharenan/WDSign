@@ -59,9 +59,9 @@ class WDSignViewModel: ObservableObject {
         let signLog = SignLog(id: id,
                               signDocumentID: documentLayoutInfo.id,
                               signDateTime: "",
-                              userID: 0,
+                              userID: Int(SystemParameterDAO.instance.getSystemParameter(with: Constants.SystemParameters.UserID)?.parameterValue ?? "") ?? 0,
                               secondaryUserID: nil,
-                              formRecordID: nil)
+                              formRecordID: customerFormRecordID)
         
         SignLogDAO.instance.persistSignatureLog(signLog: signLog)
     }

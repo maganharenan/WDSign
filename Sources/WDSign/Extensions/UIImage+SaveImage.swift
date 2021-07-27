@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension UIImage {
+    /// This function saves images at the documents folder
+    /// - Parameter imageName: The image to be saved.
+    /// - Parameter completion: Returns a boolean about the saving success
     func saveImageOnDocuments(imageName: String, completion: @escaping (Bool) -> Void) {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         // choose a name for your image

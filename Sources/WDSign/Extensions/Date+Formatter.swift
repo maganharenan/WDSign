@@ -44,6 +44,15 @@ extension Date {
         return dateString
     }
     
+    func toStringHHmmss(_ format: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.locale = Locale(identifier: "en")
+        let dateString = formatter.string(from: self as Date)
+        
+        return dateString
+    }
+    
     init(bySettingHHmm time: String) {
         let timeParts = time.components(separatedBy: ":")
         self = Calendar.current.date(bySettingHour: Int(timeParts[0])!, minute: Int(timeParts[1])!, second: 0, of: Date())!

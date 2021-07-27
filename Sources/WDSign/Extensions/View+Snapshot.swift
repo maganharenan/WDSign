@@ -8,6 +8,9 @@
 import SwiftUI
 
 extension View {
+    /// This function takes a snapshot of the view
+    /// - Warning: The returned image is not localized.
+    /// - Returns: A screenshot of the view as an UIImage.
     func snapshot() -> UIImage {
         let controller = UIHostingController(rootView: self)
         let view = controller.view

@@ -83,7 +83,11 @@ public struct WDSign: View {
                         }
                     }
                 }
-            viewModel.handleSignaturePersistence(id: signLogID)
+            viewModel.handleSignaturePersistence(id: signLogID) { success in
+                if success {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }
         }
     }
 }

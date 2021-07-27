@@ -55,14 +55,16 @@ class WDSignViewModel: ObservableObject {
             .getSubscribersList()
     }
     
-    public func handleSignaturePersistence(id: String) {
+    public func handleSignaturePersistence(id: String, completion: @escaping (Bool) -> Void) {
         let signLog = SignLog(id: id,
                               signDocumentID: documentLayoutInfo.id,
-                              signDateTime: Date().toStringHHmm(),
+                              signDateTime: Date().toString(),
                               userID: Int(SystemParameterDAO.instance.getSystemParameter(with: Constants.SystemParameters.UserID)?.parameterValue ?? "") ?? 0,
                               secondaryUserID: nil,
                               formRecordID: customerFormRecordID)
         
-        SignLogDAO.instance.persistSignatureLog(signLog: signLog)
+        SignLogDAO.instance.persistSignatureLog(signLog: signLog) { success in
+            completion(success)
+        }
     }
 }

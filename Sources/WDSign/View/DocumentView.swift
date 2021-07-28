@@ -13,8 +13,19 @@ public struct DocumentView: View {
         ZStack {
             if let backgroundWatermark = viewModel.getDocumentLayoutInfo().watermark {
                 Image(backgroundWatermark)
+                    .resizable()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .aspectRatio(contentMode: .fit)
+                    .opacity(0.12)
+            }
+            
+            if let logo = viewModel.getDocumentLayoutInfo().logo {
+                Image(logo)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 250, height: 200, alignment: .center)
+                    .opacity(0.62)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }
             
             VStack(spacing: 0) {

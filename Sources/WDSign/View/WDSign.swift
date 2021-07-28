@@ -16,7 +16,7 @@ public struct WDSign: View {
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: 0.5)
                         .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                        .frame(maxWidth: .infinity, maxHeight: 50, alignment: .bottom)
                     
                     HStack {
                         Button(action: {

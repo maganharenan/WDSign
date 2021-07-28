@@ -24,6 +24,7 @@ public struct DocumentView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250, height: 200, alignment: .center)
+                    .background(Color.red)
                     .opacity(0.62)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }

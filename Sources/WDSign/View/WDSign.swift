@@ -14,7 +14,7 @@ public struct WDSign: View {
             VStack(spacing: 0) {
                 ZStack {
                     Rectangle()
-                        .frame(maxWidth: .infinity, maxHeight: 0.5)
+                        .frame(maxWidth: .infinity, maxHeight: 0.75)
                         .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
                         .frame(maxWidth: .infinity, maxHeight: 50, alignment: .bottom)
                     

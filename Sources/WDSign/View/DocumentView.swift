@@ -23,9 +23,9 @@ public struct DocumentView: View {
                 Image(logo)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 250, height: 200, alignment: .center)
+                    .frame(width: 250, height: 200, alignment: .top)
                     .opacity(0.62)
-                    .padding()
+                    .padding(16)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }
             
@@ -41,7 +41,7 @@ public struct DocumentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(#colorLiteral(red: 0.9333333333, green: 0.9529411765, blue: 0.9607843137, alpha: 1)))
+        .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
     }
     
     @ObservedObject var viewModel: WDSignViewModel

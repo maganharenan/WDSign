@@ -12,34 +12,41 @@ public struct WDSign: View {
     public var body: some View {
         ZStack(alignment: .center) {
             VStack(spacing: 0) {
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Text(Constants.SystemResources.Cancel.translateResource())
-                            .font(.body)
-                            .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
-                            .frame(width: 100, height: 44)
-                            .opacity(buttonsOpactity)
-                    })
+                ZStack {
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 0.5)
+                        .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     
-                    Text(viewModel.getDocumentLayoutInfo().title)
-                        .font(.title2)
-                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
-                        .frame(maxWidth: .infinity)
-                    
-                    Button(action: {
-                        saveDocument()
-                    }, label: {
-                        Text(Constants.SystemResources.Save.translateResource())
-                            .font(.headline)
-                            .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
-                            .frame(width: 100, height: 44)
-                            .opacity(buttonsOpactity)
-                    })
+                    HStack {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            Text(Constants.SystemResources.Cancel.translateResource())
+                                .font(.body)
+                                .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
+                                .frame(width: 100, height: 44)
+                                .opacity(buttonsOpactity)
+                        })
+                        
+                        Text(viewModel.getDocumentLayoutInfo().title)
+                            .font(.title2)
+                            .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
+                            .frame(maxWidth: .infinity)
+                        
+                        Button(action: {
+                            saveDocument()
+                        }, label: {
+                            Text(Constants.SystemResources.Save.translateResource())
+                                .font(.headline)
+                                .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
+                                .frame(width: 100, height: 44)
+                                .opacity(buttonsOpactity)
+                        })
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+                    //.background(Color.white)
                 }
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                .background(Color.white)
                 
                 documentView
                 

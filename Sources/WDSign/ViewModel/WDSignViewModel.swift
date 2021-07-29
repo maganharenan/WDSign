@@ -61,7 +61,8 @@ class WDSignViewModel: ObservableObject {
                               signDateTime: Date().toStringHHmmss(),
                               userID: Int(SystemParameterDAO.instance.getSystemParameter(with: Constants.SystemParameters.UserID)?.parameterValue ?? "") ?? 0,
                               secondaryUserID: nil,
-                              formRecordID: customerFormRecordID)
+                              formRecordID: customerFormRecordID,
+                              readOnly: 0)
         
         SignLogDAO.instance.persistSignatureLog(signLog: signLog) { success in
             completion(success)

@@ -14,6 +14,7 @@ struct SignLog: Hashable, Codable {
     var userID: Int
     var secondaryUserID: Int?
     var formRecordID: String?
+    var readOnly: Int
     
     enum CodingKeys: String, CodingKey {
         case id = "ID"
@@ -22,6 +23,7 @@ struct SignLog: Hashable, Codable {
         case userID = "UserID"
         case secondaryUserID = "SecondaryUserID"
         case formRecordID = "FormRecordID"
+        case readOnly = "ReadOnly"
     }
 }
 
@@ -34,5 +36,6 @@ extension SignLog {
         userID = try values.decode(Int.self, forKey: .userID)
         secondaryUserID = try? values.decode(Int.self, forKey: .secondaryUserID)
         formRecordID = try? values.decode(String.self, forKey: .formRecordID)
+        readOnly = try values.decode(Int.self, forKey: .readOnly)
     }
 }

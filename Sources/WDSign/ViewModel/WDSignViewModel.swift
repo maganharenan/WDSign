@@ -12,10 +12,12 @@ class WDSignViewModel: ObservableObject {
     private var customerFormRecordID: String?
     private var placeholders = Array<String>()
     private var subscribers = Array<SubscriberData>()
+    private var productsList = Array<String>()
     
-    init(documentID: Int, customerFormRecordID: String?) {
+    init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
         self.customerFormRecordID = customerFormRecordID
+        self.productsList = productsList
         self.placeholders = handlePlaceholders()
         self.handleSubscribers()
     }
@@ -30,6 +32,16 @@ class WDSignViewModel: ObservableObject {
     
     public func getSubscriber(at index: Int) -> SubscriberData {
         return subscribers[index]
+    }
+    
+    public func buildProductsList() -> String {
+        var list = ""
+        
+        for product in productsList {
+            list += "\n• \(product)"
+        }
+        
+        return list
     }
     
     private func handlePlaceholders() -> Array<String> {

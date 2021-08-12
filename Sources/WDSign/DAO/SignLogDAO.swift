@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import SQLite
 
 final class SignLogDAO {
@@ -21,6 +22,18 @@ final class SignLogDAO {
         } catch {
             print("persistSignatureLog failled: \(error.localizedDescription)")
             completion(false)
+        }
+    }
+    
+    func encodeSignatureLog(signLog: SignLog, completion: @escaping (Bool) -> Void) {
+        let encoder = JSONEncoder()
+        do {
+        let data = try encoder.encode(signLog)
+        let json = String(data: data, encoding: String.Encoding.utf8)
+        
+        print(json)
+        } catch {
+            print("encodeSignatureLog failled: \(error.localizedDescription)")
         }
     }
 }

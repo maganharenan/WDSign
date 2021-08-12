@@ -76,7 +76,7 @@ class WDSignViewModel: ObservableObject {
                               formRecordID: customerFormRecordID,
                               readOnly: 0)
         
-        SignLogDAO.instance.persistSignatureLog(signLog: signLog) { success in
+        SignLogDAO.instance.encodeSignatureLog(signLog: signLog) { success in
             completion(success)
         }
     }

@@ -30,7 +30,7 @@ final class SignLogDAO {
         do {
             let data = try encoder.encode(signLog)
             if let json = String(data: data, encoding: String.Encoding.utf8) {
-                sendEncodedSignatureByNotification(json: json)
+                sendEncodedSignatureByNotification(json: data)
                 completion(true)
             } else {
                 completion(false)
@@ -41,8 +41,7 @@ final class SignLogDAO {
         }
     }
     
-    func sendEncodedSignatureByNotification(json: String) {
-        //NotificationCenter.default.post(name: NSNotification.Name("blockChangesAfterSign"), object: nil)
+    func sendEncodedSignatureByNotification(json: Data) {
         NotificationCenter.default.post(name: NSNotification.Name("EncodedSignature"), object: nil, userInfo: ["json":json])
     }
 }

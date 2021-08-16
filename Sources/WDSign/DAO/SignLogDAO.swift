@@ -28,12 +28,21 @@ final class SignLogDAO {
     func encodeSignatureLog(signLog: SignLog, completion: @escaping (Bool) -> Void) {
         let encoder = JSONEncoder()
         do {
-        let data = try encoder.encode(signLog)
-        let json = String(data: data, encoding: String.Encoding.utf8)
-        
-        print(json)
+            let data = try encoder.encode(signLog)
+            if let json = String(data: data, encoding: String.Encoding.utf8) {
+                sendEncodedSignatureByNotification(json: json)
+                completion(true)
+            } else {
+                completion(false)
+            }
         } catch {
             print("encodeSignatureLog failled: \(error.localizedDescription)")
+            completion(false)
         }
+    }
+    
+    func sendEncodedSignatureByNotification(json: String) {
+        //NotificationCenter.default.post(name: NSNotification.Name("blockChangesAfterSign"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("EncodedSignature"), object: nil, userInfo: ["json":json])
     }
 }

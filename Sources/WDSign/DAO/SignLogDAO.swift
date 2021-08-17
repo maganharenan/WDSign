@@ -29,12 +29,8 @@ final class SignLogDAO {
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(signLog)
-            if let json = String(data: data, encoding: String.Encoding.utf8) {
-                sendEncodedSignatureByNotification(json: data)
-                completion(true)
-            } else {
-                completion(false)
-            }
+            sendEncodedSignatureByNotification(json: data)
+            completion(true)
         } catch {
             print("encodeSignatureLog failled: \(error.localizedDescription)")
             completion(false)

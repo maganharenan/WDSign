@@ -70,8 +70,8 @@ public struct WDSign: View {
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
     
-    public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>) {
-        self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList)
+    public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
+        self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
     }
  
     private func saveDocument() {
@@ -102,6 +102,6 @@ public struct WDSign: View {
 
 struct WDSign_Previews: PreviewProvider {
     static var previews: some View {
-        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [])
+        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [], contactFormRecordID: nil)
     }
 }

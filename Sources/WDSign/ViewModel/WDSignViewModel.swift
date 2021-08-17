@@ -10,11 +10,12 @@ import SwiftUI
 class WDSignViewModel: ObservableObject {
     private var documentLayoutInfo: SignDocumentLayoutInfo!
     private var customerFormRecordID: String?
+    private var contactFormRecordID: String?
     private var placeholders = Array<String>()
     private var subscribers = Array<SubscriberData>()
     private var productsList = Array<String>()
     
-    init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>) {
+    init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
         self.customerFormRecordID = customerFormRecordID
         self.productsList = productsList
@@ -35,10 +36,10 @@ class WDSignViewModel: ObservableObject {
     }
     
     public func buildProductsList() -> String {
-        var list = ""
+        var list = "\n"
         
         for product in productsList {
-            list += "\n• \(product)"
+            list += "\n•    \(product)"
         }
         
         return list
@@ -73,12 +74,20 @@ class WDSignViewModel: ObservableObject {
                               signDateTime: Date().toStringHHmmss(),
                               userID: Int(SystemParameterDAO.instance.getSystemParameter(with: Constants.SystemParameters.UserID)?.parameterValue ?? "") ?? 0,
                               secondaryUserID: nil,
-                              formRecordID: customerFormRecordID,
+                              formRecordID: handleFormRecordID(),
                               readOnly: 0)
         
         SignLogDAO.instance.persistSignatureLog(signLog: signLog) { success in
             completion(success)
         }
+    }
+
+    private func handleFormRecordID() -> String? {
+        if let contactFormRecordID = contactFormRecordID, !contactFormRecordID.isEmpty {
+            return contactFormRecordID
+        }
+        
+        return customerFormRecordID
     }
     
     public func sendNotificationToWDSpace() {

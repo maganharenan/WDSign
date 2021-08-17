@@ -18,6 +18,7 @@ class WDSignViewModel: ObservableObject {
     init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
         self.customerFormRecordID = customerFormRecordID
+        self.contactFormRecordID = contactFormRecordID
         self.productsList = productsList
         self.placeholders = handlePlaceholders()
         self.handleSubscribers()
@@ -84,6 +85,7 @@ class WDSignViewModel: ObservableObject {
 
     private func handleFormRecordID() -> String? {
         if let contactFormRecordID = contactFormRecordID, !contactFormRecordID.isEmpty {
+            
             return contactFormRecordID
         }
         

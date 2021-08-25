@@ -18,6 +18,7 @@ final class SignLogDAO {
         
         do {
             try Database.instance.db.run(tableSignLog.insert(signLog))
+            AppSyncDAO.instance.insertRecordToSync(recordPrimaryKey: signLog.id, tableName: "SignLog")
             completion(true)
         } catch {
             print("persistSignatureLog failled: \(error.localizedDescription)")

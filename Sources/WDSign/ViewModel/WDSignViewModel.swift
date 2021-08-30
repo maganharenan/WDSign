@@ -94,7 +94,8 @@ class WDSignViewModel: ObservableObject {
     
     public func sendNotificationToWDSpace() {
         if documentLayoutInfo.blockChangesAfterSign == 1 {
-            NotificationCenter.default.post(name: NSNotification.Name("blockChangesAfterSign"), object: nil)
+            //NotificationCenter.default.post(name: NSNotification.Name("blockChangesAfterSign"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("blockChangesAfterSign"), object: nil, userInfo: ["response":true])
         }
     }
 }

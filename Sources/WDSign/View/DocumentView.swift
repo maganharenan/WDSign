@@ -40,13 +40,16 @@ public struct DocumentView: View {
                     } label: {
                         HStack {
                             Image(systemName: aware ? "checkmark.circle.fill" : "checkmark.circle")
+                                .resizable()
+                                .imageScale(.large)
                                 .frame(width: 44, height: 44)
                             
                             Text(Constants.SystemResources.iAmAware.translateResource())
                                 .foregroundColor(.black)
-                                .padding(.leading, 8)
+                                //.padding(.leading, 8)
                         }
                     }
+                    .frame(maxWidth: 620, maxHeight: 50, alignment: .leading)
                     .padding(.bottom, 110)
                 } else {
                     ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in

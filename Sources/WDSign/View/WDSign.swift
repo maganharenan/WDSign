@@ -45,7 +45,7 @@ public struct WDSign: View {
                         })
                     }
                     .frame(maxWidth: .infinity, maxHeight: 50)
-                    //.background(Color.white)
+                    .background(Color.white)
                 }
                 
                 documentView

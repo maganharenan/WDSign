@@ -43,6 +43,13 @@ public struct WDSign: View {
                                 .frame(width: 100, height: 44)
                                 .opacity(buttonsOpactity)
                         })
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text(Constants.SystemResources.alertTitlePendingAgreement.translateResource()),
+                                message: Text(Constants.SystemResources.alertBodyPendingAgreement.translateResource()),
+                                dismissButton: .default(Text("OK").foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex()))
+                            )
+                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: 50)
                     .background(Color.white)
@@ -70,6 +77,7 @@ public struct WDSign: View {
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
     @State var aware: Bool = false
+    @State var showAlert: Bool = false
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
@@ -77,7 +85,10 @@ public struct WDSign: View {
  
     private func saveDocument() {
         if viewModel.getDocumentLayoutInfo().isAware == 1 {
-            guard aware == true else { return }
+            guard aware == true else {
+                showAlert.toggle()
+                return
+            }
         }
         
         withAnimation {

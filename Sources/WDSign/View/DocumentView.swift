@@ -43,6 +43,7 @@ public struct DocumentView: View {
                                 //.resizable()
                                 .imageScale(.large)
                                 .frame(width: 44, height: 44)
+                                .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                             
                             Text(Constants.SystemResources.iAmAware.translateResource())
                                 .foregroundColor(.black)

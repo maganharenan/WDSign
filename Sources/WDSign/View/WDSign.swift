@@ -82,10 +82,19 @@ public struct WDSign: View {
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
     }
+    
+    private func checkIfAllCanvasHasDrawings() -> Bool {
+        return canvas.drawing.bounds != .zero ? true : false
+    }
  
     private func saveDocument() {
         if viewModel.getDocumentLayoutInfo().isAware == 1 {
             guard aware == true else {
+                showAlert.toggle()
+                return
+            }
+        } else {
+            guard checkIfAllCanvasHasDrawings() else {
                 showAlert.toggle()
                 return
             }

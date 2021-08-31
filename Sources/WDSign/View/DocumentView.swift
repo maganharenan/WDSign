@@ -40,14 +40,12 @@ public struct DocumentView: View {
                     } label: {
                         HStack {
                             Image(systemName: aware ? "checkmark.circle.fill" : "checkmark.circle")
-                                //.resizable()
                                 .imageScale(.large)
                                 .frame(width: 44, height: 44)
                                 .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                             
                             Text(Constants.SystemResources.iAmAware.translateResource())
                                 .foregroundColor(.black)
-                                //.padding(.leading, 8)
                         }
                     }
                     .frame(maxWidth: 620, maxHeight: 50, alignment: .leading)

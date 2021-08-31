@@ -58,7 +58,7 @@ public struct WDSign: View {
     }
     
     public var documentView: some View {
-        DocumentView(viewModel: viewModel, showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex)
+        DocumentView(viewModel: viewModel, showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
     }
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -69,12 +69,17 @@ public struct WDSign: View {
     @State public var signatureImages: Image?
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
+    @State var aware: Bool
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
     }
  
     private func saveDocument() {
+        if viewModel.getDocumentLayoutInfo().isAware == 1 {
+            guard aware == true else { return }
+        }
+        
         withAnimation {
             buttonsOpactity = 0
         }

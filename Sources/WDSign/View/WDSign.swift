@@ -47,7 +47,7 @@ public struct WDSign: View {
                             Alert(
                                 title: Text(Constants.SystemResources.alertTitlePendingAgreement.translateResource()),
                                 message: Text(Constants.SystemResources.alertBodyPendingAgreement.translateResource()),
-                                dismissButton: .default(Text("OK").accentColor(AppColorsDAO.instance.system_color_7.getColorFromHex()) as! Text)
+                                dismissButton: .default(Text("OK"))
                             )
                         }
                     }

@@ -34,9 +34,19 @@ public struct DocumentView: View {
                     .padding(.top, 100)
                     .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
                 
-                ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in
-                    SignFieldView(showModal: $showModal, signatureImage: $signatureImages, subscriber: viewModel.getSubscriber(at: index))
-                        .padding(.bottom, 110)
+                if viewModel.getDocumentLayoutInfo().isAware == 1 {
+                    Button {
+                        
+                    } label: {
+                        HStack {
+                            Text(Constants.SystemResources.iAmAware.translateResource())
+                        }
+                    }
+                } else {
+                    ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in
+                        SignFieldView(showModal: $showModal, signatureImage: $signatureImages, subscriber: viewModel.getSubscriber(at: index))
+                            .padding(.bottom, 110)
+                    }
                 }
             }
         }

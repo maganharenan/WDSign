@@ -43,6 +43,7 @@ final class Constants {
         case Sign = "sign"
         case SignHere = "sign_here"
         case Clean = "clean"
+        case iAmAware = "i_am_aware"
     }
     
     enum SubscriberType: String {

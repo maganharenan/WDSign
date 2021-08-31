@@ -29,7 +29,8 @@ final class WDSignDAO: WDSignDAOProtocol {
                 PlaceholderSubscriber3,
                 Watermark,
                 Logo,
-                BlockChangesAfterSign
+                BlockChangesAfterSign,
+                IsAware
         FROM    SignDocument A,
                 SignDocumentSubscriber AS SDS,
                 SignDocumentTemplate AS SDT
@@ -52,7 +53,8 @@ final class WDSignDAO: WDSignDAOProtocol {
                                                   placeholderSubscriber3: row[7] as? String,
                                                   watermark: row[8] as! String,
                                                   logo: row[9] as! String,
-                                                  blockChangesAfterSign: Int(row[10] as! Int64))
+                                                  blockChangesAfterSign: Int(row[10] as! Int64),
+                                                  isAware: Int(row[11] as! Int64))
             }
         } catch {
             print("fetchDocumentInformations failled: \(error.localizedDescription)")
@@ -74,4 +76,5 @@ struct SignDocumentLayoutInfo {
     let watermark: String
     let logo: String
     let blockChangesAfterSign: Int
+    let isAware: Int
 }

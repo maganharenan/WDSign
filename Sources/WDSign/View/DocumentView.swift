@@ -40,7 +40,7 @@ public struct DocumentView: View {
                     } label: {
                         HStack {
                             Image(systemName: aware ? "checkmark.circle.fill" : "checkmark.circle")
-                                .resizable()
+                                //.resizable()
                                 .imageScale(.large)
                                 .frame(width: 44, height: 44)
                             

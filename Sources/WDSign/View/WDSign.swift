@@ -84,7 +84,7 @@ public struct WDSign: View {
     }
     
     private func checkIfAllCanvasHasDrawings() -> Bool {
-        return canvas.drawing.bounds != .zero ? true : false
+        return canvas.drawing.strokes.count > 0
     }
  
     private func saveDocument() {

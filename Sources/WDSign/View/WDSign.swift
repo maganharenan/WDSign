@@ -69,7 +69,7 @@ public struct WDSign: View {
     @State public var signatureImages: Image?
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
-    @State var aware: Bool
+    @State var aware: Bool = false
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)

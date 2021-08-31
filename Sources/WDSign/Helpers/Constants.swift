@@ -46,6 +46,8 @@ final class Constants {
         case iAmAware = "i_am_aware"
         case alertTitlePendingAgreement = "alert_title_pending_agreement"
         case alertBodyPendingAgreement = "alert_body_pending_agreement"
+        case alertTitlePendingSign = "alert_title_pending_sign"
+        case alertBodyPendingSign = "alert_body_pending_sign"
     }
     
     enum SubscriberType: String {

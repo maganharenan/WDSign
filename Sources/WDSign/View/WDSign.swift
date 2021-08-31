@@ -45,8 +45,8 @@ public struct WDSign: View {
                         })
                         .alert(isPresented: $showAlert) {
                             Alert(
-                                title: Text(Constants.SystemResources.alertTitlePendingAgreement.translateResource()),
-                                message: Text(Constants.SystemResources.alertBodyPendingAgreement.translateResource()),
+                                title: Text(alertTitle),
+                                message: Text(alertBody),
                                 dismissButton: .default(Text("OK"))
                             )
                         }
@@ -78,6 +78,8 @@ public struct WDSign: View {
     @State var buttonsOpactity: Double = 1
     @State var aware: Bool = false
     @State var showAlert: Bool = false
+    @State var alertTitle = ""
+    @State var alertBody = ""
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
@@ -89,11 +91,15 @@ public struct WDSign: View {
  
     private func saveDocument() {
         if viewModel.getDocumentLayoutInfo().isAware == 1 {
+            alertTitle = Constants.SystemResources.alertTitlePendingAgreement.translateResource()
+            alertBody = Constants.SystemResources.alertBodyPendingAgreement.translateResource()
             guard aware == true else {
                 showAlert.toggle()
                 return
             }
         } else {
+            alertTitle = Constants.SystemResources.alertTitlePendingSign.translateResource()
+            alertBody = Constants.SystemResources.alertBodyPendingSign.translateResource()
             guard checkIfAllCanvasHasDrawings() else {
                 showAlert.toggle()
                 return

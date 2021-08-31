@@ -36,12 +36,18 @@ public struct DocumentView: View {
                 
                 if viewModel.getDocumentLayoutInfo().isAware == 1 {
                     Button {
-                        
+                        aware.toggle()
                     } label: {
                         HStack {
+                            Image(systemName: aware ? "checkmark.circle.fill" : "checkmark.circle")
+                                .frame(width: 44, height: 44)
+                            
                             Text(Constants.SystemResources.iAmAware.translateResource())
+                                .foregroundColor(.black)
+                                .padding(.leading, 8)
                         }
                     }
+                    .padding(.bottom, 110)
                 } else {
                     ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in
                         SignFieldView(showModal: $showModal, signatureImage: $signatureImages, subscriber: viewModel.getSubscriber(at: index))
@@ -59,4 +65,5 @@ public struct DocumentView: View {
     @Binding public var canvas: PKCanvasView
     @Binding public var signatureImages: Image?
     @Binding public var selectedCanvasIndex: Int
+    @Binding public var aware: Bool
 }

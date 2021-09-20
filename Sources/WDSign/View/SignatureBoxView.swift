@@ -73,7 +73,8 @@ struct SignatureBoxView: View {
         }
     }
     
-    @Binding public var canvas: PKCanvasView
+    @State var canvas = PKCanvasView()
+    @Binding public var bindcanvas: PKCanvasView
     @Binding public var showModal: Bool
     @Binding public var signatureImage: Image?
     @State var dragGesturePosition: CGFloat = 0
@@ -81,7 +82,7 @@ struct SignatureBoxView: View {
     private var screen = UIScreen.main.bounds
     
     init(canvas: Binding<PKCanvasView>, showModal: Binding<Bool>, signatureImage: Binding<Image?>) {
-        self._canvas = canvas
+        self._bindcanvas = canvas
         self.storedCanvas = canvas.wrappedValue.drawing
         self._showModal = showModal
         self._signatureImage = signatureImage
@@ -99,6 +100,7 @@ struct SignatureBoxView: View {
     }
     
     private func saveSignature() {
+        bindcanvas = canvas
         let imageArea: CGRect = canvas.drawing.bounds
         signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
         

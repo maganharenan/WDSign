@@ -60,13 +60,7 @@ public struct WDSign: View {
             }
             .navigationBarHidden(true)
 
-            if selectedCanvasIndex == 0 {
-                SignatureBoxView(canvas: $firstCanvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
-            } else if selectedCanvasIndex == 1 {
-                SignatureBoxView(canvas: $secondCanvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
-            } else {
-                SignatureBoxView(canvas: $thirdCanvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
-            }
+            SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
         }
     }
     
@@ -77,11 +71,15 @@ public struct WDSign: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var viewModel: WDSignViewModel
     
-    @State public var showModal = false
-    @State var canvas: Array<PKCanvasView> = [PKCanvasView(), PKCanvasView(), PKCanvasView()]
-    @State var firstCanvas = PKCanvasView()
-    @State var secondCanvas = PKCanvasView()
-    @State var thirdCanvas = PKCanvasView()
+    @State public var showModal = false {
+        didSet {
+            if showModal {
+                canvas.drawing = drawings[selectedCanvasIndex]
+            }
+        }
+    }
+    @State var canvas = PKCanvasView()
+    @State var drawings: Array<PKDrawing> = [PKDrawing(), PKDrawing(), PKDrawing()]
     @State public var signatureImages: Array<Image?> = [nil, nil, nil]
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
@@ -94,21 +92,11 @@ public struct WDSign: View {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
     }
     
-    private func getCurrentCanvas() -> Binding<PKCanvasView> {
-        if selectedCanvasIndex == 0 {
-            return $firstCanvas
-        } else if selectedCanvasIndex == 1 {
-            return $secondCanvas
-        } else {
-            return $thirdCanvas
-        }
-    }
-    
     private func checkIfAllCanvasHasDrawings() -> Bool {
         var error = false
         
-        canvas.forEach {phCanvas in
-            if phCanvas.drawing.strokes.count <= 0 {
+        drawings.forEach {phCanvas in
+            if phCanvas.strokes.count <= 0 {
                 error = true
             }
         }

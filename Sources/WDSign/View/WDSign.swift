@@ -71,18 +71,16 @@ public struct WDSign: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var viewModel: WDSignViewModel
     
-    @State public var showModal = false {
-        didSet {
-            if showModal {
-                canvas = PKCanvasView()
-                canvas.drawing = drawings[selectedCanvasIndex]
-            }
-        }
-    }
+    @State public var showModal = false
     @State var canvas = PKCanvasView()
     @State var drawings: Array<PKDrawing> = [PKDrawing(), PKDrawing(), PKDrawing()]
     @State public var signatureImages: Array<Image?> = [nil, nil, nil]
-    @State public var selectedCanvasIndex: Int = 0
+    @State public var selectedCanvasIndex: Int = 0 {
+        didSet {
+            canvas.drawing = PKDrawing()
+            canvas.drawing = drawings[selectedCanvasIndex]
+        }
+    }
     @State var buttonsOpactity: Double = 1
     @State var aware: Bool = false
     @State var showAlert: Bool = false

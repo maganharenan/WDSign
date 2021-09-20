@@ -60,7 +60,13 @@ public struct WDSign: View {
             }
             .navigationBarHidden(true)
 
-            SignatureBoxView(canvas: getCurrentCanvas(), showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
+            if selectedCanvasIndex == 0 {
+                SignatureBoxView(canvas: $firstCanvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
+            } else if selectedCanvasIndex == 1 {
+                SignatureBoxView(canvas: $secondCanvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
+            } else {
+                SignatureBoxView(canvas: $thirdCanvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
+            }
         }
     }
     

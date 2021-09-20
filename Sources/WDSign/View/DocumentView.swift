@@ -53,7 +53,7 @@ public struct DocumentView: View {
                 } else {
                     HStack(spacing: 0) {
                         ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in
-                            SignFieldView(showModal: $showModal, signatureImage: $signatureImages[index], subscriber: viewModel.getSubscriber(at: index))
+                            SignFieldView(selectedCanvasIndex: $selectedCanvasIndex, showModal: $showModal, signatureImage: $signatureImages[index], subscriber: viewModel.getSubscriber(at: index), currentCanvasIndex: index)
                                 .padding(.bottom, 110)
                                 .padding(.horizontal, 32)
                         }
@@ -67,7 +67,7 @@ public struct DocumentView: View {
     
     @ObservedObject var viewModel: WDSignViewModel
     @Binding public var showModal: Bool
-    @Binding public var canvas: PKCanvasView
+    @Binding public var canvas: Array<PKCanvasView>
     @Binding public var signatureImages: Array<Image?>
     @Binding public var selectedCanvasIndex: Int
     @Binding public var aware: Bool

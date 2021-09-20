@@ -60,7 +60,7 @@ public struct WDSign: View {
             }
             .navigationBarHidden(true)
 
-            SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
+            SignatureBoxView(canvas: $canvas[selectedCanvasIndex], showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
         }
     }
     
@@ -72,7 +72,7 @@ public struct WDSign: View {
     @ObservedObject var viewModel: WDSignViewModel
     
     @State public var showModal = false
-    @State public var canvas = PKCanvasView()
+    @State public var canvas: Array<PKCanvasView> = [PKCanvasView(), PKCanvasView(), PKCanvasView()]
     @State public var signatureImages: Array<Image?> = [nil, nil, nil]
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
@@ -86,7 +86,16 @@ public struct WDSign: View {
     }
     
     private func checkIfAllCanvasHasDrawings() -> Bool {
-        return canvas.drawing.strokes.count > 0
+        var error = false
+        
+        canvas.forEach {phCanvas in
+            if phCanvas.drawing.strokes.count <= 0 {
+                error = true
+            }
+        }
+        
+        return error
+        //return canvas.drawing.strokes.count > 0
     }
  
     private func saveDocument() {

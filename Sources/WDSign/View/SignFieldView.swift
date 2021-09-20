@@ -49,17 +49,20 @@ public struct SignFieldView: View {
         .frame(width: 270, height: 104)
     }
 
+    @Binding var selectedCanvasIndex: Int
     @Binding var showModal: Bool
     @Binding public var signatureImage: Image?
     var subscriber: SubscriberData
+    var currentCanvasIndex: Int
     
     private func showSignatureBox() {
+        selectedCanvasIndex = currentCanvasIndex
         showModal.toggle()
     }
 }
 
 struct SignFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SignFieldView(showModal: .constant(false), signatureImage: .constant(Image(systemName: "")), subscriber: SubscriberData(name: "", jobTitle: "", document: ""))
+        SignFieldView(selectedCanvasIndex: .constant(0), showModal: .constant(false), signatureImage: .constant(Image(systemName: "")), subscriber: SubscriberData(name: "", jobTitle: "", document: ""), currentCanvasIndex: 0)
     }
 }

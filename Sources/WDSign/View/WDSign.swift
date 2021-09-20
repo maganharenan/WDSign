@@ -95,7 +95,6 @@ public struct WDSign: View {
         }
         
         return error
-        //return canvas.drawing.strokes.count > 0
     }
  
     private func saveDocument() {

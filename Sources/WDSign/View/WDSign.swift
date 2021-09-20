@@ -13,12 +13,6 @@ public struct WDSign: View {
         ZStack(alignment: .center) {
             VStack(spacing: 0) {
                 ZStack {
-                    Rectangle()
-                        .frame(maxWidth: .infinity, maxHeight: 0.75)
-                        .foregroundColor(.red)
-                       // .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
-                        .frame(maxWidth: .infinity, maxHeight: 50, alignment: .bottom)
-                    
                     HStack {
                         Button(action: {
                             self.presentationMode.wrappedValue.dismiss()
@@ -54,6 +48,11 @@ public struct WDSign: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: 50)
                     .background(Color.white)
+                    
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 0.75)
+                        .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
+                        .frame(maxWidth: .infinity, maxHeight: 50, alignment: .bottom)
                 }
                 
                 documentView

@@ -117,7 +117,7 @@ public struct WDSign: View {
         } else {
             alertTitle = Constants.SystemResources.alertTitlePendingSign.translateResource()
             alertBody = Constants.SystemResources.alertBodyPendingSign.translateResource()
-            guard checkIfAllCanvasHasDrawings() else {
+            guard !checkIfAllCanvasHasDrawings() else {
                 showAlert.toggle()
                 return
             }

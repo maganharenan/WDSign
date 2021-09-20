@@ -105,15 +105,15 @@ public struct WDSign: View {
     }
     
     private func checkIfAllCanvasHasDrawings() -> Bool {
-        var error = false
+        var segue = false
         
-        drawings.forEach {phCanvas in
-            if phCanvas.strokes.count <= 0 {
-                error = true
+        drawings.forEach { drawing in
+            if drawing.strokes.count > 0 {
+                segue = true
             }
         }
         
-        return error
+        return segue
     }
  
     private func saveDocument() {
@@ -127,7 +127,7 @@ public struct WDSign: View {
         } else {
             alertTitle = Constants.SystemResources.alertTitlePendingSign.translateResource()
             alertBody = Constants.SystemResources.alertBodyPendingSign.translateResource()
-            guard !checkIfAllCanvasHasDrawings() else {
+            guard checkIfAllCanvasHasDrawings() else {
                 showAlert.toggle()
                 return
             }

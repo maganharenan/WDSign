@@ -107,7 +107,9 @@ public struct WDSign: View {
     private func checkIfAllCanvasHasDrawings() -> Bool {
         var segue = true
         
-        drawings.forEach { drawing in
+        for drawing in drawings {
+            print(drawing.strokes.count)
+
             if drawing.strokes.count > 0 {
                 segue = false
             }

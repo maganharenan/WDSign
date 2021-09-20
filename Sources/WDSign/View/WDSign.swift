@@ -60,7 +60,7 @@ public struct WDSign: View {
             }
             .navigationBarHidden(true)
 
-            SignatureBoxView(canvas: $canvas[selectedCanvasIndex], showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
+            SignatureBoxView(canvas: getCurrentCanvas(), showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
         }
     }
     
@@ -73,6 +73,9 @@ public struct WDSign: View {
     
     @State public var showModal = false
     @State var canvas: Array<PKCanvasView> = [PKCanvasView(), PKCanvasView(), PKCanvasView()]
+    @State var firstCanvas = PKCanvasView()
+    @State var secondCanvas = PKCanvasView()
+    @State var thirdCanvas = PKCanvasView()
     @State public var signatureImages: Array<Image?> = [nil, nil, nil]
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
@@ -83,6 +86,16 @@ public struct WDSign: View {
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
+    }
+    
+    private func getCurrentCanvas() -> Binding<PKCanvasView> {
+        if selectedCanvasIndex == 0 {
+            return $firstCanvas
+        } else if selectedCanvasIndex == 1 {
+            return $secondCanvas
+        } else {
+            return $thirdCanvas
+        }
     }
     
     private func checkIfAllCanvasHasDrawings() -> Bool {

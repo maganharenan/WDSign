@@ -55,6 +55,7 @@ public struct DocumentView: View {
                         ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in
                             SignFieldView(showModal: $showModal, signatureImage: $signatureImages, subscriber: viewModel.getSubscriber(at: index))
                                 .padding(.bottom, 110)
+                                .padding(.horizontal, 32)
                         }
                     }
                 }

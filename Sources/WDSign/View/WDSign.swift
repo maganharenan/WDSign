@@ -15,7 +15,8 @@ public struct WDSign: View {
                 ZStack {
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: 0.75)
-                        .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
+                        .foregroundColor(.red)
+                       // .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
                         .frame(maxWidth: .infinity, maxHeight: 50, alignment: .bottom)
                     
                     HStack {
@@ -65,7 +66,7 @@ public struct WDSign: View {
     }
     
     public var documentView: some View {
-        DocumentView(viewModel: viewModel, showModal: $showModal/*, canvas: $canvas*/, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
+        DocumentView(viewModel: viewModel, showModal: $showModal, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
     }
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>

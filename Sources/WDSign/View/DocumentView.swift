@@ -51,9 +51,11 @@ public struct DocumentView: View {
                     .frame(maxWidth: 620, maxHeight: 50, alignment: .leading)
                     .padding(.bottom, 110)
                 } else {
-                    ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in
-                        SignFieldView(showModal: $showModal, signatureImage: $signatureImages, subscriber: viewModel.getSubscriber(at: index))
-                            .padding(.bottom, 110)
+                    HStack(spacing: 0) {
+                        ForEach(0..<viewModel.getNumberOfSignatureFields(), id: \.self) { index in
+                            SignFieldView(showModal: $showModal, signatureImage: $signatureImages, subscriber: viewModel.getSubscriber(at: index))
+                                .padding(.bottom, 110)
+                        }
                     }
                 }
             }

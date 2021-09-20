@@ -110,7 +110,7 @@ public struct WDSign: View {
         for drawing in drawings {
             print(drawing.strokes.count)
 
-            if drawing.strokes.count > 0 {
+            if drawing.strokes.count <= 0 {
                 segue = false
             }
         }

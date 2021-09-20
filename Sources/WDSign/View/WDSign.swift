@@ -84,20 +84,20 @@ public struct WDSign: View {
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
-        setupDrawings()
+//        setupDrawings()
     }
     
-    private func setupDrawings() {
-        if viewModel.getNumberOfSignatureFields() == 1 {
-            drawings.remove(at: 2)
-            drawings.remove(at: 1)
-        } else if viewModel.getNumberOfSignatureFields() == 2 {
-            drawings.remove(at: 2)
-        }
-        
-        print(drawings.count)
-        
-    }
+//    private func setupDrawings() {
+//        if viewModel.getNumberOfSignatureFields() == 1 {
+//            drawings.remove(at: 2)
+//            drawings.remove(at: 1)
+//        } else if viewModel.getNumberOfSignatureFields() == 2 {
+//            drawings.remove(at: 2)
+//        }
+//
+//        print(drawings.count)
+//
+//    }
     
     private func changeCurrentCanvas(_ bool: Bool) {
         if bool == true {
@@ -110,10 +110,10 @@ public struct WDSign: View {
     private func checkIfAllCanvasHasDrawings() -> Bool {
         var segue = true
         
-        for drawing in drawings {
-            print(drawing.strokes.count)
+        for index in 0..<viewModel.getNumberOfSignatureFields() {
+            print(drawings[index].strokes.count)
 
-            if drawing.strokes.count <= 0 {
+            if drawings[index].strokes.count <= 0 {
                 segue = false
             }
         }

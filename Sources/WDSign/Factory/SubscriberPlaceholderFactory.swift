@@ -43,6 +43,8 @@ final class SubscriberFactory {
         case .Form:
             guard let customerFormRecordID = customerFormRecordID else { return self }
             subscribers.append(FormPlaceholderFactory(customerFormRecordID: customerFormRecordID).createSubscriber())
+        case .User:
+            subscribers.append(UserPlaceholderFactory().createSubscriber())
         default: break
         }
         

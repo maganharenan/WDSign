@@ -36,8 +36,7 @@ final class SubscriberDAO {
         var jobTitle = ""
         
         guard let formID = getEntityFormID(customerFormRecordID: customerFormRecordID) else { return jobTitle }
-        
-        //let query = "SELECT SubtitleFormFieldID FROM Form WHERE ID = \(formID)"
+
         let query = """
         SELECT IFNULL(LD.Value, FD.Value)
         FROM FormData FD

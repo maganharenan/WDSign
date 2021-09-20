@@ -22,7 +22,7 @@ public struct SignFieldView: View {
                             .frame(maxWidth: 270, maxHeight: 88)
                     } else {
                         Text(Constants.SystemResources.Sign.translateResource())
-                            .font(.body)
+                            .font(.headline)
                             .foregroundColor(AppColorsDAO.instance.system_color_16.getColorFromHex())
                             .frame(maxWidth: .infinity, maxHeight: 44)
                         

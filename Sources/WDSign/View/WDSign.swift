@@ -94,6 +94,9 @@ public struct WDSign: View {
         } else if viewModel.getNumberOfSignatureFields() == 2 {
             drawings.remove(at: 2)
         }
+        
+        print(drawings.count)
+        
     }
     
     private func changeCurrentCanvas(_ bool: Bool) {

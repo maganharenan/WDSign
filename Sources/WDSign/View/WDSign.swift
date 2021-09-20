@@ -72,7 +72,7 @@ public struct WDSign: View {
     @ObservedObject var viewModel: WDSignViewModel
     
     @State public var showModal = false
-    @State public var canvas: Array<PKCanvasView> = [PKCanvasView(), PKCanvasView(), PKCanvasView()]
+    @State var canvas: Array<PKCanvasView> = [PKCanvasView(), PKCanvasView(), PKCanvasView()]
     @State public var signatureImages: Array<Image?> = [nil, nil, nil]
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1

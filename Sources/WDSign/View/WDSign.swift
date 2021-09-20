@@ -65,7 +65,7 @@ public struct WDSign: View {
     }
     
     public var documentView: some View {
-        DocumentView(viewModel: viewModel, showModal: $showModal, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
+        DocumentView(viewModel: viewModel, showModal: $showModal.onChange(changeCurrentCanvas(_:)), signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
     }
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -75,12 +75,7 @@ public struct WDSign: View {
     @State var canvas = PKCanvasView()
     @State var drawings: Array<PKDrawing> = [PKDrawing(), PKDrawing(), PKDrawing()]
     @State public var signatureImages: Array<Image?> = [nil, nil, nil]
-    @State public var selectedCanvasIndex: Int = 0 {
-        didSet {
-            canvas.drawing = PKDrawing()
-            canvas.drawing = drawings[selectedCanvasIndex]
-        }
-    }
+    @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
     @State var aware: Bool = false
     @State var showAlert: Bool = false
@@ -89,6 +84,10 @@ public struct WDSign: View {
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
+    }
+    
+    private func changeCurrentCanvas(_ bool: Bool) {
+        canvas.drawing = drawings[selectedCanvasIndex]
     }
     
     private func checkIfAllCanvasHasDrawings() -> Bool {

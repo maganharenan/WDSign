@@ -74,6 +74,7 @@ public struct WDSign: View {
     @State public var showModal = false {
         didSet {
             if showModal {
+                canvas = PKCanvasView()
                 canvas.drawing = drawings[selectedCanvasIndex]
             }
         }

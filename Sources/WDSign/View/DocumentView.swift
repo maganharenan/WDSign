@@ -42,7 +42,7 @@ public struct DocumentView: View {
                             Image(systemName: aware ? "checkmark.circle.fill" : "checkmark.circle")
                                 .imageScale(.large)
                                 .frame(width: 44, height: 44)
-                                .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
+                                .foregroundColor(aware ? AppColorsDAO.instance.system_color_15.getColorFromHex() : AppColorsDAO.instance.system_color_16.getColorFromHex())
                             
                             Text(Constants.SystemResources.iAmAware.translateResource())
                                 .foregroundColor(.black)

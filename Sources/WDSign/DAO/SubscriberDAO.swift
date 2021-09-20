@@ -37,7 +37,14 @@ final class SubscriberDAO {
         
         guard let formID = getEntityFormID(customerFormRecordID: customerFormRecordID) else { return jobTitle }
         
-        let query = "SELECT Name FROM Form WHERE ID = \(formID)"
+        //let query = "SELECT SubtitleFormFieldID FROM Form WHERE ID = \(formID)"
+        let query = """
+        SELECT IFNULL(LD.Value, FD.Value)
+        FROM FormData FD
+        JOIN Form F ON FD.FormFieldID = F.SubtitleFormFieldID
+        LEFT JOIN ListData LD ON FD.Value = LD.ID
+        WHERE FormRecordID = '\(customerFormRecordID)'
+        """
         
         do {
             try Database.instance.db.prepare(query).forEach { row in

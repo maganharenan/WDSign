@@ -84,21 +84,8 @@ public struct WDSign: View {
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
-//        setupDrawings()
     }
-    
-//    private func setupDrawings() {
-//        if viewModel.getNumberOfSignatureFields() == 1 {
-//            drawings.remove(at: 2)
-//            drawings.remove(at: 1)
-//        } else if viewModel.getNumberOfSignatureFields() == 2 {
-//            drawings.remove(at: 2)
-//        }
-//
-//        print(drawings.count)
-//
-//    }
-    
+
     private func changeCurrentCanvas(_ bool: Bool) {
         if bool == true {
             canvas.drawing = drawings[selectedCanvasIndex]
@@ -111,8 +98,6 @@ public struct WDSign: View {
         var segue = true
         
         for index in 0..<viewModel.getNumberOfSignatureFields() {
-            print(drawings[index].strokes.count)
-
             if drawings[index].strokes.count <= 0 {
                 segue = false
             }

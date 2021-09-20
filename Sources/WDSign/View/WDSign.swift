@@ -87,7 +87,11 @@ public struct WDSign: View {
     }
     
     private func changeCurrentCanvas(_ bool: Bool) {
-        canvas.drawing = drawings[selectedCanvasIndex]
+        if bool {
+            canvas.drawing = drawings[selectedCanvasIndex]
+        } else {
+            drawings[selectedCanvasIndex] = canvas.drawing
+        }
     }
     
     private func checkIfAllCanvasHasDrawings() -> Bool {

@@ -30,6 +30,7 @@ class WDSignViewModel: ObservableObject {
     
     public func getNumberOfSignatureFields() -> Int {
         let number = subscribers.count
+        let placeholdernumber = placeholders.count
         
         return subscribers.count
     }

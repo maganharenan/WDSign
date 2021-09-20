@@ -84,6 +84,16 @@ public struct WDSign: View {
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
+        setupDrawings()
+    }
+    
+    private func setupDrawings() {
+        if viewModel.getNumberOfSignatureFields() == 1 {
+            drawings.remove(at: 2)
+            drawings.remove(at: 1)
+        } else if viewModel.getNumberOfSignatureFields() == 2 {
+            drawings.remove(at: 2)
+        }
     }
     
     private func changeCurrentCanvas(_ bool: Bool) {

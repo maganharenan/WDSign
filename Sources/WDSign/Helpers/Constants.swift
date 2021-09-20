@@ -35,6 +35,9 @@ final class Constants {
         case UserJobTitle = "user_job_title"
         case UserDocument = "user_document"
         case UserID = "user_id"
+        case UsernameManager = "user_name_manager"
+        case UserJobTitleManager = "user_job_title_manager"
+        case UserDocumentManagar = "user_document_manager"
     }
     
     enum SystemResources: String {

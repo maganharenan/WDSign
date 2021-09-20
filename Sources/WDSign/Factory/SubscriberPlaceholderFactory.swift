@@ -45,7 +45,11 @@ final class SubscriberFactory {
             subscribers.append(FormPlaceholderFactory(customerFormRecordID: customerFormRecordID).createSubscriber())
         case .User:
             subscribers.append(UserPlaceholderFactory().createSubscriber())
-        default: break
+        case .Manager:
+            subscribers.append(ManagerPlaceholderFactory().createSubscriber())
+        case .Subordinate:
+            subscribers.append(SubordinatePlaceholderFactory().createSubscriber())
+        case .none: break
         }
         
         return self
@@ -94,8 +98,41 @@ final class UserPlaceholderFactory: SubscriberPlaceholderFactory {
     }
 }
 
-//Manager
-//Subordinate
+final class ManagerPlaceholderFactory: SubscriberPlaceholderFactory {
+    func createSubscriber() -> SubscriberData {
+        return SubscriberData(name: getSubscriberName(), jobTitle: getSubscriberjobTitle(), document: getSubscriberDocument())
+    }
+    
+    func getSubscriberName() -> String {
+        return SystemParameterDAO.instance.getSystemParameter(with: .UsernameManager)?.parameterValue ?? ""
+    }
+    
+    func getSubscriberjobTitle() -> String {
+        return SystemParameterDAO.instance.getSystemParameter(with: .UserJobTitleManager)?.parameterValue ?? ""
+    }
+    
+    func getSubscriberDocument() -> String {
+        return SystemParameterDAO.instance.getSystemParameter(with: .UserDocumentManagar)?.parameterValue ?? ""
+    }
+}
+
+final class SubordinatePlaceholderFactory: SubscriberPlaceholderFactory {
+    func createSubscriber() -> SubscriberData {
+        return SubscriberData(name: getSubscriberName(), jobTitle: getSubscriberjobTitle(), document: getSubscriberDocument())
+    }
+    
+    func getSubscriberName() -> String {
+        return "doesn't have parameter"
+    }
+    
+    func getSubscriberjobTitle() -> String {
+        return "doesn't have parameter"
+    }
+    
+    func getSubscriberDocument() -> String {
+        return "doesn't have parameter"
+    }
+}
 
 class SubscriberData: NSObject {
     let name: String

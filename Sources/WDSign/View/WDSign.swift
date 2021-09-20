@@ -60,7 +60,7 @@ public struct WDSign: View {
             }
             .navigationBarHidden(true)
 
-            SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages)
+            SignatureBoxView(canvas: $canvas, showModal: $showModal, signatureImage: $signatureImages[selectedCanvasIndex])
         }
     }
     
@@ -73,7 +73,7 @@ public struct WDSign: View {
     
     @State public var showModal = false
     @State public var canvas = PKCanvasView()
-    @State public var signatureImages: Image?
+    @State public var signatureImages: Array<Image?> = [nil, nil, nil]
     @State public var selectedCanvasIndex: Int = 0
     @State var buttonsOpactity: Double = 1
     @State var aware: Bool = false

@@ -67,7 +67,7 @@ public struct DocumentView: View {
     
     @ObservedObject var viewModel: WDSignViewModel
     @Binding public var showModal: Bool
-    @Binding public var canvas: Array<PKCanvasView>
+    //@Binding public var canvas: Array<PKCanvasView>
     @Binding public var signatureImages: Array<Image?>
     @Binding public var selectedCanvasIndex: Int
     @Binding public var aware: Bool

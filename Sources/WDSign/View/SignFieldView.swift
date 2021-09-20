@@ -57,9 +57,7 @@ public struct SignFieldView: View {
     
     private func showSignatureBox() {
         selectedCanvasIndex = currentCanvasIndex
-        if selectedCanvasIndex == currentCanvasIndex {
-            showModal.toggle()
-        }
+        showModal.toggle()
     }
 }
 

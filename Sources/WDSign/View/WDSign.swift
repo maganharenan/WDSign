@@ -65,7 +65,7 @@ public struct WDSign: View {
     }
     
     public var documentView: some View {
-        DocumentView(viewModel: viewModel, showModal: $showModal, canvas: $canvas, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
+        DocumentView(viewModel: viewModel, showModal: $showModal/*, canvas: $canvas*/, signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
     }
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>

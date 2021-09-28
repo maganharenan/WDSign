@@ -34,6 +34,8 @@ public struct DocumentView: View {
                     .padding(.top, 100)
                     .frame(maxWidth: 620, maxHeight: .infinity, alignment: .topLeading)
                 
+                Text("\(Date().toString("dd de MMMM de yyyy"))")
+                
                 if viewModel.getDocumentLayoutInfo().isAware == 1 {
                     Button {
                         aware.toggle()

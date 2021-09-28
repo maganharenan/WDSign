@@ -36,6 +36,16 @@ class WDSignViewModel: ObservableObject {
         return subscribers[index]
     }
     
+    public func getFormatedDateToDocument() -> String {
+        let date = Date()
+        let year = date.toString("yyyy")
+        let month = date.toString("MMMM").lowercased()
+        let day = date.toString("dd")
+        let of = Constants.SystemResources.of.translateResource()
+        
+        return "\(day) \(of) \(Constants.SystemResources.init(rawValue: month)?.translateResource() ?? "") \(of) \(year)"
+    }
+    
     public func buildProductsList() -> String {
         var list = "\n"
         

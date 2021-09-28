@@ -51,6 +51,19 @@ final class Constants {
         case alertBodyPendingAgreement = "alert_body_pending_agreement"
         case alertTitlePendingSign = "alert_title_pending_sign"
         case alertBodyPendingSign = "alert_body_pending_sign"
+        case january
+        case february
+        case march
+        case april
+        case may
+        case june
+        case july
+        case august
+        case september
+        case october
+        case november
+        case december
+        case of
     }
     
     enum SubscriberType: String {

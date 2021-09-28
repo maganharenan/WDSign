@@ -38,11 +38,20 @@ final class SubscriberDAO {
         guard let formID = getEntityFormID(customerFormRecordID: customerFormRecordID) else { return jobTitle }
 
         let query = """
-        SELECT IFNULL(LD.Value, FD.Value)
-        FROM FormData FD
-        JOIN Form F ON FD.FormFieldID = F.SubtitleFormFieldID
-        LEFT JOIN ListData LD ON FD.Value = LD.ID
-        WHERE FormRecordID = '\(customerFormRecordID)'
+        SELECT  IFNULL(LD.Description, FD.Value)
+        FROM            FormData FD
+        LEFT JOIN   ListData LD ON FD.Value = LD.ID
+        WHERE  FormFieldID IN (
+            SELECT      ParameterValue
+            FROM        SystemParameter
+            WHERE       ParameterKey = 'sign_subtitle'
+            AND         FormID = (
+                SELECT FormID
+                FROM FormRecord
+                WHERE ID = '\(customerFormRecordID)'
+            )
+        )
+        AND   FD.FormRecordID = '\(customerFormRecordID)'
         """
         
         do {

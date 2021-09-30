@@ -38,9 +38,11 @@ public struct SignFieldView: View {
                 .font(.system(size: 15, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(subscriber.jobTitle)
-                .font(.footnote)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            if !subscriber.jobTitle.isEmpty {
+                Text(subscriber.jobTitle)
+                    .font(.footnote)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             
             Text(subscriber.document)
                 .font(.footnote)

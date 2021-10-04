@@ -28,6 +28,7 @@ public struct WDSign: View {
                             .font(.title2)
                             .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                             .frame(maxWidth: .infinity)
+                            .opacity(buttonsOpactity)
                         
                         Button(action: {
                             saveDocument()

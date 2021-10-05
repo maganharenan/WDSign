@@ -48,7 +48,7 @@ public struct SignFieldView: View {
                 .font(.footnote)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(width: 270, height: 104)
+        .frame(width: 270, height: 104, alignment: .top)
     }
 
     @Binding var selectedCanvasIndex: Int

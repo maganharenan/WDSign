@@ -114,7 +114,6 @@ final class SubscriberDAO {
     }
     
     private func getNameFormFieldIDFor(formID: Int) -> Int? {
-        //let query = "SELECT ID From FormField WHERE FormID = \(formID) AND NAME IN ('Nome', 'Nome fantasia') AND Required = 1"
         let query = """
         SELECT  TitleFormFieldID ID
         FROM        Form

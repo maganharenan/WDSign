@@ -130,7 +130,7 @@ public struct WDSign: View {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let signLogID = UUID().uuidString
-            self
+            documentView
                 .snapshot()
                 .saveImageOnDocuments(imageName: signLogID) { segue in
                     if segue {

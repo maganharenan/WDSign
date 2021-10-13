@@ -83,7 +83,7 @@ public struct WDSign: View {
     @State var alertTitle = ""
     @State var alertBody = ""
     
-    public init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
+    public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
     }
 
@@ -151,6 +151,6 @@ public struct WDSign: View {
 
 struct WDSign_Previews: PreviewProvider {
     static var previews: some View {
-        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [], contactFormRecordID: nil)
+        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [:], contactFormRecordID: nil)
     }
 }

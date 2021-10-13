@@ -13,9 +13,9 @@ class WDSignViewModel: ObservableObject {
     private var contactFormRecordID: String?
     private var placeholders = Array<String>()
     private var subscribers = Array<SubscriberData>()
-    private var productsList = Array<String>()
+    private var productsList = [String:Array<(String, String, String)>]()
     
-    init(documentID: Int, customerFormRecordID: String?, productsList: Array<String>, contactFormRecordID: String?) {
+    init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?) {
         self.documentLayoutInfo = WDSignDAO.instance.fetchDocumentInformations(documentID: documentID)
         self.customerFormRecordID = customerFormRecordID
         self.contactFormRecordID = contactFormRecordID

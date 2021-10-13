@@ -53,14 +53,10 @@ class WDSignViewModel: ObservableObject {
             list += "\n•    \(product.key)"
             
             for document in product.value {
-                list += "\n     \(document.0) - \(document.1) - QTY: \(document.2)"
+                list += "\n      \(document.0) - \(document.1) - \(Constants.SystemResources.productQuantity.translateResource(nil)): \(document.2)"
             }
         }
-        
-//        for product in productsList {
-//            list += "\n•    \(product)"
-//        }
-        
+
         return list
     }
     
@@ -174,17 +170,5 @@ class WDSignViewModel: ObservableObject {
         let formFieldID = placeholder.slice(from: "(", to: ")") ?? ""
         
         return FormDataDAO.instance.getFormDataValue(formRecordID: customerFormRecordID ?? "", formFieldID: formFieldID)
-    }
-}
-
-extension String {
-
-    func slice(from: String, to: String) -> String? {
-
-        return (range(of: from)?.upperBound).flatMap { substringFrom in
-            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
-                String(self[substringFrom..<substringTo])
-            }
-        }
     }
 }

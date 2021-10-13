@@ -64,6 +64,7 @@ final class Constants {
         case november
         case december
         case of
+        case productQuantity = "product_quantity"
     }
     
     enum SubscriberType: String {

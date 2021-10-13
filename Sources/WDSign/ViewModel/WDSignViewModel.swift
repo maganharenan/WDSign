@@ -110,9 +110,64 @@ class WDSignViewModel: ObservableObject {
         }
     }
     
-    private func buildPlaceholdersList() {
-        let response = documentLayoutInfo.documentText.slice(from: "{", to: "}")
+    public func getDocumentTextFormatedWithValues(text: String) -> String {
+        let placeholdersList = buildPlaceholdersList(text: text)
+        let cleanedPlaceholdersList = cleanPlaceholdersInvalidCharacters(placeholders: placeholdersList)
+        let placeholdersValues = getValuesForPlaceholdes(placeholders: cleanedPlaceholdersList)
         
+        var newText = documentLayoutInfo.documentText
+        
+        placeholdersValues.forEach { placeholder in
+            newText = newText.replacingOccurrences(of: placeholder.0, with: placeholder.1)
+        }
+        
+        return newText
+    }
+    
+    private func buildPlaceholdersList(text: String) -> Array<String> {
+        let stringComponents: Array<String> = text.components(separatedBy: " ").filter { $0.contains("{") && $0.contains("}") }
+        
+        return stringComponents
+    }
+    
+    private func cleanPlaceholdersInvalidCharacters(placeholders: Array<String>) -> Array<String> {
+        var cleanedPlaceholders = Array<String>()
+        
+        for placeholder in placeholders {
+            cleanedPlaceholders.append(placeholder.slice(from: "{", to: "}") ?? "")
+        }
+        
+        return cleanedPlaceholders
+    }
+    
+    private func getValuesForPlaceholdes(placeholders: Array<String>) -> Array<(String, String)> {
+        var response = Array<(String, String)>()
+        
+        placeholders.forEach { placeholder in
+            response.append(("{\(placeholder)}", ""))
+        }
+        
+        return response
+    }
+    
+    private func getValueFor(placeholder: String) -> String {
+        switch placeholder {
+        case "PRODUCT_LIST": return buildProductsList()
+        case "USER_ID": return SystemParameterDAO.instance.getSystemParameter(with: .UserID, formID: nil)?.parameterValue ?? ""
+        case "USER_NAME": return SystemParameterDAO.instance.getSystemParameter(with: .Username, formID: nil)?.parameterValue ?? ""
+        default:
+            if placeholder.contains("FORM_FIELD") {
+                return getFormFieldValueFor(placeholder: placeholder)
+            } else {
+                return ""
+            }
+        }
+    }
+    
+    private func getFormFieldValueFor(placeholder: String) -> String {
+        let formFieldID = placeholder.slice(from: "(", to: ")") ?? ""
+        
+        return FormDataDAO.instance.getFormDataValue(formRecordID: customerFormRecordID ?? "", formFieldID: formFieldID)
     }
 }
 

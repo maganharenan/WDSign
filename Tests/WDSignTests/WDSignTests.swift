@@ -2,14 +2,15 @@ import XCTest
 @testable import WDSign
 
 final class WDSignTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-//        XCTAssertEqual(WDSign.text, "Hello, World!")
+    let text = "{PRODUCT_LIST} lorem ipsum {USER_ID} lorem ipsum {USER_NAME}, {FORM_FIELD(000)} "
+    
+    func testBuildPlaceholdersList() {
+        let stringComponents: Array<String> = text.components(separatedBy: " ").filter { $0.contains("{") && $0.contains("}") }
+        
+        XCTAssertEqual(stringComponents.count, 4)
     }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
+    
+    func testReplacingPlaceholdersByValue() {
+        
+    }
 }

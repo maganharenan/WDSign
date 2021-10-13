@@ -22,6 +22,8 @@ class WDSignViewModel: ObservableObject {
         self.productsList = productsList
         self.placeholders = handlePlaceholders()
         self.handleSubscribers()
+        
+        buildPlaceholdersList()
     }
     
     public func getDocumentLayoutInfo() -> SignDocumentLayoutInfo {
@@ -105,6 +107,23 @@ class WDSignViewModel: ObservableObject {
     public func sendNotificationToWDSpace() {
         if documentLayoutInfo.blockChangesAfterSign == 1 {
             NotificationCenter.default.post(name: NSNotification.Name("blockChangesAfterSign"), object: nil, userInfo: ["response":true])
+        }
+    }
+    
+    private func buildPlaceholdersList() {
+        let response = documentLayoutInfo.documentText.slice(from: "{", to: "}")
+        
+    }
+}
+
+extension String {
+
+    func slice(from: String, to: String) -> String? {
+
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
         }
     }
 }

@@ -142,7 +142,7 @@ class WDSignViewModel: ObservableObject {
         var response = Array<(String, String)>()
         
         placeholders.forEach { placeholder in
-            response.append(("{\(placeholder)}", ""))
+            response.append(("{\(placeholder)}", getValueFor(placeholder: placeholder)))
         }
         
         return response

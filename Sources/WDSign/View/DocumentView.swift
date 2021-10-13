@@ -31,7 +31,7 @@ public struct DocumentView: View {
             
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
-                    Text(viewModel.getDocumentLayoutInfo().documentText.replacingOccurrences(of: "{PRODUCT_LIST}", with: viewModel.buildProductsList()))
+                    Text(viewModel.getDocumentTextFormatedWithValues(text: viewModel.getDocumentLayoutInfo().documentText))
                         .padding(.top, 100)
                         .frame(maxWidth: 620, alignment: .topLeading)
                     

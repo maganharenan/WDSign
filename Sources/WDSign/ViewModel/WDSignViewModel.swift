@@ -22,8 +22,6 @@ class WDSignViewModel: ObservableObject {
         self.productsList = productsList
         self.placeholders = handlePlaceholders()
         self.handleSubscribers()
-        
-        buildPlaceholdersList()
     }
     
     public func getDocumentLayoutInfo() -> SignDocumentLayoutInfo {

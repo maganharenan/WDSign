@@ -50,8 +50,16 @@ class WDSignViewModel: ObservableObject {
         var list = "\n"
         
         for product in productsList {
-            list += "\n•    \(product)"
+            list += "\n•    \(product.key)"
+            
+            for document in product.value {
+                list += "\n     \(document.0) - \(document.1) - QTY: \(document.2)"
+            }
         }
+        
+//        for product in productsList {
+//            list += "\n•    \(product)"
+//        }
         
         return list
     }

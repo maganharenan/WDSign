@@ -34,8 +34,6 @@ final class SubscriberDAO {
     
     func getEntityJobTitle(customerFormRecordID: String) -> String {
         var jobTitle = ""
-        
-        guard let formID = getEntityFormID(customerFormRecordID: customerFormRecordID) else { return jobTitle }
 
         let query = """
         SELECT  IFNULL(LD.Description, FD.Value)

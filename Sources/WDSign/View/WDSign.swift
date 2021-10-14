@@ -82,11 +82,11 @@ public struct WDSign: View {
     @State var showAlert: Bool = false
     @State var alertTitle = ""
     @State var alertBody = ""
-    var viewController: UIViewController
+    @Binding var viewController: UIViewController
     
-    public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?, viewController: UIViewController) {
+    public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?, viewController: Binding<UIViewController>) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
-        self.viewController = viewController
+        self._viewController = viewController
     }
     
     private func errorAlertWithCustom(title: String, message: String) {
@@ -168,6 +168,6 @@ public struct WDSign: View {
 
 struct WDSign_Previews: PreviewProvider {
     static var previews: some View {
-        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [:], contactFormRecordID: nil, viewController: UIViewController())
+        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [:], contactFormRecordID: nil, viewController: .constant(UIViewController()))
     }
 }

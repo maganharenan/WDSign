@@ -8,33 +8,6 @@
 import SwiftUI
 import PencilKit
 
-public final class WDSignSDKViewController: UIHostingController<WDSign> {
-    var viewController: UIViewController!
-    
-    init(documentID: Int, customerFormRecordID: String?, productsList: [String : Array<(String, String, String)>], contactFormRecordID: String?, viewController: UIViewController) {
-        self.viewController = viewController
-        super.init(rootView: WDSign(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID, viewController: .constant(viewController)))
-        //rootView.toggle = showNotRequiredDocumentsModal
-    }
-    
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-//
-//    override func viewDidLayoutSubviews() {
-//        self.view.frame = self.resizeView(rootView: initFrom)
-//    }
-//
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.navigationController?.setNavigationBarHidden(true, animated: false)
-//    }
-//
-//    func dismiss() {
-//        dismiss(animated: true, completion: nil)
-//    }
-
-}
-
 public struct WDSign: View {
     public var body: some View {
         ZStack(alignment: .center) {
@@ -116,6 +89,30 @@ public struct WDSign: View {
         self._viewController = viewController
     }
     
+    func getCurrentVC() -> UIViewController? {
+    var result: UIViewController?
+    var window = UIApplication.shared.windows.first { $0.isKeyWindow }
+            if window?.windowLevel != UIWindow.Level.normal {
+                let windows = UIApplication.shared.windows
+                for tmpWin in windows {
+                    if tmpWin.windowLevel == UIWindow.Level.normal {
+                        window = tmpWin
+                        break
+                    }
+                }
+            }
+            let fromView = window?.subviews[0]
+            if let nextRespnder = fromView?.next {
+                if nextRespnder.isKind(of: UIViewController.self) {
+                    result = nextRespnder as? UIViewController
+                    result?.navigationController?.pushViewController(result!, animated: false)
+                } else {
+                    result = window?.rootViewController
+                }
+            }
+            return result
+        }
+    
     private func errorAlertWithCustom(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -125,7 +122,7 @@ public struct WDSign: View {
         alert.addAction(dismissAction)
         
         DispatchQueue.main.async {
-            viewController.present(alert, animated: true)
+            getCurrentVC().present(alert, animated: true)
         }
     }
 

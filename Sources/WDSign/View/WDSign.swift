@@ -83,7 +83,7 @@ public struct WDSign: View {
     @State var alertTitle = ""
     @State var alertBody = ""
     @Binding var viewController: UIViewController
-    public var test: ((_ item: (String, String)?) -> ())!
+    public var test: ((_ item: (String, String)?) -> ())?
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?, viewController: Binding<UIViewController>) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
@@ -129,7 +129,7 @@ public struct WDSign: View {
             alertBody = Constants.SystemResources.alertBodyPendingAgreement.translateResource()
             guard aware == true else {
                 //errorAlertWithCustom(title: alertTitle, message: alertBody)
-                test((alertTitle, alertBody))
+                self.test?((alertTitle, alertBody))
                 //showAlert.toggle()
                 return
             }
@@ -138,7 +138,7 @@ public struct WDSign: View {
             alertBody = Constants.SystemResources.alertBodyPendingSign.translateResource()
             guard checkIfAllCanvasHasDrawings() else {
                 //errorAlertWithCustom(title: alertTitle, message: alertBody)
-                test((alertTitle, alertBody))
+                self.test?((alertTitle, alertBody))
                 //showAlert.toggle()
                 return
             }

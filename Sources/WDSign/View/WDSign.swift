@@ -83,7 +83,7 @@ public struct WDSign: View {
     @State var alertTitle = ""
     @State var alertBody = ""
     @Binding var viewController: UIViewController
-    public var test: ((_ item: (String, String)?) -> Void)!
+    public var test: ((_ item: (String, String)?) -> ())!
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?, viewController: Binding<UIViewController>) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)

@@ -82,9 +82,24 @@ public struct WDSign: View {
     @State var showAlert: Bool = false
     @State var alertTitle = ""
     @State var alertBody = ""
+    var viewController: UIViewController
     
-    public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?) {
+    public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?, viewController: UIViewController) {
         self.viewModel = WDSignViewModel(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID)
+        self.viewController = viewController
+    }
+    
+    private func errorAlertWithCustom(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let dismissAction = UIAlertAction(title: "Ok", style: .default)
+        dismissAction.setValue(UIColor(hexString: "3C697F"), forKey: "titleTextColor")
+        
+        alert.addAction(dismissAction)
+        
+        DispatchQueue.main.async {
+            viewController.present(alert, animated: true)
+        }
     }
 
     private func changeCurrentCanvas(_ bool: Bool) {
@@ -112,14 +127,16 @@ public struct WDSign: View {
             alertTitle = Constants.SystemResources.alertTitlePendingAgreement.translateResource()
             alertBody = Constants.SystemResources.alertBodyPendingAgreement.translateResource()
             guard aware == true else {
-                showAlert.toggle()
+                errorAlertWithCustom(title: alertTitle, message: alertBody)
+                //showAlert.toggle()
                 return
             }
         } else {
             alertTitle = Constants.SystemResources.alertTitlePendingSign.translateResource()
             alertBody = Constants.SystemResources.alertBodyPendingSign.translateResource()
             guard checkIfAllCanvasHasDrawings() else {
-                showAlert.toggle()
+                errorAlertWithCustom(title: alertTitle, message: alertBody)
+                //showAlert.toggle()
                 return
             }
         }

@@ -98,7 +98,7 @@ public struct WDSign: View {
         alert.addAction(dismissAction)
         
         DispatchQueue.main.async {
-            getCurrentVC()?.present(alert, animated: true)
+            viewController.present(alert, animated: true)
         }
     }
 

@@ -122,7 +122,7 @@ public struct WDSign: View {
         alert.addAction(dismissAction)
         
         DispatchQueue.main.async {
-            getCurrentVC().present(alert, animated: true)
+            getCurrentVC()?.present(alert, animated: true)
         }
     }
 

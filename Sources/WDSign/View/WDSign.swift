@@ -8,7 +8,7 @@
 import SwiftUI
 import PencilKit
 
-final class WDSignSDKViewController: UIHostingController<WDSign> {
+public final class WDSignSDKViewController: UIHostingController<WDSign> {
     var viewController: UIViewController!
     
     init(documentID: Int, customerFormRecordID: String?, productsList: [String : Array<(String, String, String)>], contactFormRecordID: String?, viewController: UIViewController) {

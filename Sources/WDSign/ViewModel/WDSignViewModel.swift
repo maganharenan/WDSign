@@ -47,7 +47,7 @@ class WDSignViewModel: ObservableObject {
     }
     
     public func buildProductsList() -> String {
-        var list = "\n"
+        var list = ""
         
         for product in productsList {
             list += "\n•    \(product.key)"

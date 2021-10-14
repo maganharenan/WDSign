@@ -89,30 +89,6 @@ public struct WDSign: View {
         self._viewController = viewController
     }
     
-    func getCurrentVC() -> UIViewController? {
-    var result: UIViewController?
-    var window = UIApplication.shared.windows.first { $0.isKeyWindow }
-            if window?.windowLevel != UIWindow.Level.normal {
-                let windows = UIApplication.shared.windows
-                for tmpWin in windows {
-                    if tmpWin.windowLevel == UIWindow.Level.normal {
-                        window = tmpWin
-                        break
-                    }
-                }
-            }
-            let fromView = window?.subviews[0]
-            if let nextRespnder = fromView?.next {
-                if nextRespnder.isKind(of: UIViewController.self) {
-                    result = nextRespnder as? UIViewController
-                    result?.navigationController?.pushViewController(result!, animated: false)
-                } else {
-                    result = window?.rootViewController
-                }
-            }
-            return result
-        }
-    
     private func errorAlertWithCustom(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -151,16 +127,16 @@ public struct WDSign: View {
             alertTitle = Constants.SystemResources.alertTitlePendingAgreement.translateResource()
             alertBody = Constants.SystemResources.alertBodyPendingAgreement.translateResource()
             guard aware == true else {
-                errorAlertWithCustom(title: alertTitle, message: alertBody)
-                //showAlert.toggle()
+                //errorAlertWithCustom(title: alertTitle, message: alertBody)
+                showAlert.toggle()
                 return
             }
         } else {
             alertTitle = Constants.SystemResources.alertTitlePendingSign.translateResource()
             alertBody = Constants.SystemResources.alertBodyPendingSign.translateResource()
             guard checkIfAllCanvasHasDrawings() else {
-                errorAlertWithCustom(title: alertTitle, message: alertBody)
-                //showAlert.toggle()
+                //errorAlertWithCustom(title: alertTitle, message: alertBody)
+                showAlert.toggle()
                 return
             }
         }

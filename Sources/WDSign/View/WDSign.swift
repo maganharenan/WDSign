@@ -8,6 +8,33 @@
 import SwiftUI
 import PencilKit
 
+final class WDSignSDKViewController: UIHostingController<WDSign> {
+    var viewController: UIViewController!
+    
+    init(documentID: Int, customerFormRecordID: String?, productsList: [String : Array<(String, String, String)>], contactFormRecordID: String?, viewController: UIViewController) {
+        self.viewController = viewController
+        super.init(rootView: WDSign(documentID: documentID, customerFormRecordID: customerFormRecordID, productsList: productsList, contactFormRecordID: contactFormRecordID, viewController: .constant(viewController)))
+        //rootView.toggle = showNotRequiredDocumentsModal
+    }
+    
+    @objc required dynamic init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+//
+//    override func viewDidLayoutSubviews() {
+//        self.view.frame = self.resizeView(rootView: initFrom)
+//    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.navigationController?.setNavigationBarHidden(true, animated: false)
+//    }
+//
+//    func dismiss() {
+//        dismiss(animated: true, completion: nil)
+//    }
+
+}
+
 public struct WDSign: View {
     public var body: some View {
         ZStack(alignment: .center) {

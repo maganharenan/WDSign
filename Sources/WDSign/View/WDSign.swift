@@ -168,6 +168,6 @@ public struct WDSign: View {
 
 struct WDSign_Previews: PreviewProvider {
     static var previews: some View {
-        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [:], contactFormRecordID: nil)
+        WDSign(documentID: 1, customerFormRecordID: nil, productsList: [:], contactFormRecordID: nil, viewController: UIViewController())
     }
 }

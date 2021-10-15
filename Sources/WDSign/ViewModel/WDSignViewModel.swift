@@ -46,13 +46,21 @@ class WDSignViewModel: ObservableObject {
         return "\(day) \(of) \(Constants.SystemResources.init(rawValue: month)?.translateResource() ?? "") \(of) \(year)"
     }
     
+    private func orderDictionaryKeys() -> Array<String> {
+        return productsList.keys.sorted(by: { $0 < $1 })
+    }
+    
     public func buildProductsList() -> String {
+        let productsListKeys = orderDictionaryKeys()
+        
         var list = ""
         
-        for product in productsList {
-            list += "\n•    \(product.key)"
+        for product in productsListKeys {
+            list += "\n•    \(product)"
             
-            for document in product.value {
+            guard let documentsArray = productsList[product] else { return list }
+            
+            for document in documentsArray {
                 list += "\n      \(document.0) - \(document.1) - \(Constants.SystemResources.productQuantity.translateResource(nil)): \(document.2)"
             }
         }

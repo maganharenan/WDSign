@@ -36,7 +36,7 @@ public struct DocumentView: View {
                         .frame(maxWidth: 620, alignment: .topLeading)
                     
                     Text(viewModel.getFormatedDateToDocument())
-                        .padding(.top, 20)
+                        .padding(.top, 24)
                         .font(.system(size: 15, weight: .semibold))
                         .frame(maxWidth: 620, alignment: .topLeading)
                 }

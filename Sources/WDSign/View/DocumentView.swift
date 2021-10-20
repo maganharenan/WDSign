@@ -16,7 +16,7 @@ public struct DocumentView: View {
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .aspectRatio(contentMode: .fit)
-                    .opacity(0.12)
+                    .opacity(0.08)
             }
             
             if let logo = viewModel.getDocumentLayoutInfo().logo {
@@ -24,7 +24,7 @@ public struct DocumentView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250, height: 200, alignment: .top)
-                    .opacity(0.62)
+                    .opacity(0.48)
                     .padding(16)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             }

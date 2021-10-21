@@ -10,6 +10,7 @@ import PencilKit
 
 public struct DocumentView: View {
     public var body: some View {
+        ScrollView {
         ZStack {
             if let backgroundWatermark = viewModel.getDocumentLayoutInfo().watermark {
                 Image(backgroundWatermark)
@@ -71,6 +72,7 @@ public struct DocumentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+        }
     }
     
     @ObservedObject var viewModel: WDSignViewModel

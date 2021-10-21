@@ -14,8 +14,8 @@ public struct DocumentView: View {
             if let backgroundWatermark = viewModel.getDocumentLayoutInfo().watermark {
                 Image(backgroundWatermark)
                     .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height - 50)
-                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height - 50)
+                    .aspectRatio(1/1, contentMode: .fit)
                     .opacity(0.08)
             }
             

@@ -68,6 +68,13 @@ public struct WDSign: View {
     public var documentView: some View {
         ScrollView {
             DocumentView(viewModel: viewModel, showModal: $showModal.onChange(changeCurrentCanvas(_:)), signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
+                .overlay(
+                    GeometryReader { proxy in
+                        Color.clear.onAppear {
+                            documentSize = CGSize(width: proxy.size.width, height: proxy.size.height)
+                        }
+                    }
+                )
         }
     }
 
@@ -84,6 +91,7 @@ public struct WDSign: View {
     @State var showAlert: Bool = false
     @State var alertTitle = ""
     @State var alertBody = ""
+    @State var documentSize: CGSize = CGSize(width: 0.0, height: 0.0)
     @Binding var viewController: UIViewController
     
     public init(documentID: Int, customerFormRecordID: String?, productsList: [String:Array<(String, String, String)>], contactFormRecordID: String?, viewController: Binding<UIViewController>) {
@@ -150,7 +158,7 @@ public struct WDSign: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let signLogID = UUID().uuidString
             documentView
-                .snapshot()
+                .snapshot(with: documentSize)
                 .saveImageOnDocuments(imageName: signLogID) { segue in
                     if segue {
                         withAnimation {

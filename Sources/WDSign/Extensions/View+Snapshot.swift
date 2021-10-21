@@ -11,11 +11,11 @@ extension View {
     /// This function takes a snapshot of the view
     /// - Warning: The returned image is not localized.
     /// - Returns: A screenshot of the view as an UIImage.
-    func snapshot() -> UIImage {
+    func snapshot(with size: CGSize) -> UIImage {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
 
-        let targetSize = CGSize(width: view?.bounds.width ?? 1024, height: view?.bounds.height ?? 768)
+        let targetSize = CGSize(width: size.width, height: size.height)
         view?.bounds = CGRect(origin: .zero, size: targetSize)
         view?.backgroundColor = .clear
 

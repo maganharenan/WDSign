@@ -66,7 +66,9 @@ public struct WDSign: View {
     }
     
     public var documentView: some View {
-        DocumentView(viewModel: viewModel, showModal: $showModal.onChange(changeCurrentCanvas(_:)), signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
+        ScrollView {
+            DocumentView(viewModel: viewModel, showModal: $showModal.onChange(changeCurrentCanvas(_:)), signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
+        }
     }
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>

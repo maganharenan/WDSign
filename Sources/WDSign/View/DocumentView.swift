@@ -15,8 +15,9 @@ public struct DocumentView: View {
                 Image(backgroundWatermark)
                     .resizable()
                     .aspectRatio(1/1, contentMode: .fit)
-                    //.frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height - 50)
+                    .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height - 50)
                     .opacity(0.08)
+                    .frame(maxHeight: .infinity)
             }
             
             if let logo = viewModel.getDocumentLayoutInfo().logo {

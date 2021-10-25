@@ -23,7 +23,8 @@ struct SignatureBoxView: View {
                         Text(Constants.SystemResources.Cancel.translateResource())
                             .font(.body)
                             .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
-                            .frame(width: 85, height: 44, alignment: .center)
+                            .frame(width: 85, height: 44, alignment: .leading)
+                            .padding(.leading, 16)
                     })
                     
                     Text(Constants.SystemResources.SignHere.translateResource())
@@ -36,7 +37,8 @@ struct SignatureBoxView: View {
                         Text(Constants.SystemResources.Save.translateResource())
                             .font(.headline)
                             .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
-                            .frame(width: 85, height: 44, alignment: .center)
+                            .frame(width: 85, height: 44, alignment: .trailing)
+                            .padding(.trailing, 16)
                     })
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)

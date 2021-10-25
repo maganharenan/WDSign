@@ -68,7 +68,7 @@ struct SignatureBoxView: View {
             .frame(width: 540, height: 343, alignment: .center)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .offset(y: showModal ? screen.height + dragGesturePosition : UIScreen.main.bounds.height * 2 + 200)
+            .offset(y: showModal ? 0 : UIScreen.main.bounds.height * 2 + 200)
             //.position(y: showModal ? (screen.height / 2) + dragGesturePosition : UIScreen.main.bounds.height * 2 + 200)
             .animation(.easeInOut)
         }

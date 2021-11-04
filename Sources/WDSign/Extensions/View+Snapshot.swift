@@ -15,6 +15,8 @@ extension View {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
 
+        print("document size: \(size), view size: \(view?.frame.size), screen size: \(UIScreen.main.bounds)")
+
         let targetSize = CGSize(width: size.width, height: size.height)
         view?.bounds = CGRect(origin: .zero, size: targetSize)
         view?.backgroundColor = .clear

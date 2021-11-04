@@ -157,8 +157,6 @@ public struct WDSign: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let signLogID = UUID().uuidString
 
-            print("document Size: \(documentSize) - screenSize: \(UIScreen.main.bounds)")
-
             documentView
                 .snapshot(with: documentSize)
                 .saveImageOnDocuments(imageName: signLogID) { segue in

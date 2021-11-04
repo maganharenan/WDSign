@@ -67,6 +67,8 @@ public struct WDSign: View {
     
     public var documentView: some View {
         ScrollView {
+            ZStack {
+                Color.purple
             DocumentView(viewModel: viewModel, showModal: $showModal.onChange(changeCurrentCanvas(_:)), signatureImages: $signatureImages, selectedCanvasIndex: $selectedCanvasIndex, aware: $aware)
                 .overlay(
                     GeometryReader { proxy in
@@ -75,6 +77,7 @@ public struct WDSign: View {
                         }
                     }
                 )
+            }
         }
     }
 

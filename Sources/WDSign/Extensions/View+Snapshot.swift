@@ -22,7 +22,7 @@ extension View {
         let renderer = UIGraphicsImageRenderer(size: targetSize)
 
         return renderer.image { _ in
-            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+            view?.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y: getTopSafeAreaInset()), size: targetSize), afterScreenUpdates: true)
         }
     }
 

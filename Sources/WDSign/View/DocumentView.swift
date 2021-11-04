@@ -72,13 +72,6 @@ public struct DocumentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-        .overlay(
-            GeometryReader { proxy in
-                Color.clear.onAppear {
-                    print("document size: \(CGSize(width: proxy.size.width, height: proxy.size.height))")
-                }
-            }
-        )
     }
     
     @ObservedObject var viewModel: WDSignViewModel

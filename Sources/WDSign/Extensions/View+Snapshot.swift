@@ -15,7 +15,7 @@ extension View {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
 
-        let targetSize = CGSize(width: size.width, height: size.height - getTopSafeAreaInset())
+        let targetSize = CGSize(width: size.width, height: size.height - 200)
         view?.bounds = CGRect(origin: .zero, size: targetSize)
         view?.backgroundColor = .red
 

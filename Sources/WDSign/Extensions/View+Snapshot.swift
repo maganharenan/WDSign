@@ -15,24 +15,14 @@ extension View {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
 
-        let targetSize = CGSize(width: size.width, height: size.height - getTopSafeAreaInset())
-        view?.bounds = CGRect(origin: CGPoint(x: 0, y: getTopSafeAreaInset()), size: targetSize)
-        view?.backgroundColor = .red
+        let targetSize = CGSize(width: size.width, height: size.height)
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .white
 
         let renderer = UIGraphicsImageRenderer(size: targetSize)
 
         return renderer.image { _ in
-            view?.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y: getTopSafeAreaInset()), size: targetSize), afterScreenUpdates: true)
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
     }
-
-    private func getTopSafeAreaInset() -> CGFloat {
-        let window = UIApplication.shared.windows.first
-        let topPadding = window?.safeAreaInsets.top
-
-        guard let topPadding = topPadding else { return 0.0 }
-
-        return topPadding
-    }
-
 }

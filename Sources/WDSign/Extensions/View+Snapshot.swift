@@ -15,7 +15,7 @@ extension View {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
 
-        let targetSize = CGSize(width: size.width, height: size.height)
+        let targetSize = CGSize(width: size.width, height: size.height - getTopSafeAreaInset() ?? 0)
         view?.bounds = CGRect(origin: .zero, size: targetSize)
         view?.backgroundColor = .red
 
@@ -25,4 +25,12 @@ extension View {
             view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
     }
+
+    private func getTopSafeAreaInset() -> CGFloat? {
+        let window = UIApplication.shared.windows.first
+        let topPadding = window?.safeAreaInsets.top
+
+        return topPadding
+    }
+
 }

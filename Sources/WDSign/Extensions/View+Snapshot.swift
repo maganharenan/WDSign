@@ -15,7 +15,7 @@ extension View {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
 
-        let targetSize = CGSize(width: size.width, height: size.height - getTopSafeAreaInset() ?? 0)
+        let targetSize = CGSize(width: size.width, height: size.height - getTopSafeAreaInset())
         view?.bounds = CGRect(origin: .zero, size: targetSize)
         view?.backgroundColor = .red
 
@@ -26,9 +26,11 @@ extension View {
         }
     }
 
-    private func getTopSafeAreaInset() -> CGFloat? {
+    private func getTopSafeAreaInset() -> CGFloat {
         let window = UIApplication.shared.windows.first
         let topPadding = window?.safeAreaInsets.top
+
+        guard let topPadding = topPadding else { return 0.0 }
 
         return topPadding
     }

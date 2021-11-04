@@ -154,12 +154,15 @@ public struct WDSign: View {
             }
         }
         
-        withAnimation {
-            buttonsOpactity = 0
-        }
+//        withAnimation {
+//            buttonsOpactity = 0
+//        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let signLogID = UUID().uuidString
+
+            print("document Size: \(documentSize)")
+
             documentView
                 .snapshot(with: documentSize)
                 .saveImageOnDocuments(imageName: signLogID) { segue in

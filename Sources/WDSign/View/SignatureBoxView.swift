@@ -41,7 +41,13 @@ struct SignatureBoxView: View {
                             .frame(width: 85, height: 44, alignment: .trailing)
                             .padding(.trailing, 16)
                     })
-                        .disabled(!(canvas.drawing.strokes.count > 0))
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text(Constants.SystemResources.alertTitlePendingSign.translateResource()),
+                                message: Text(Constants.SystemResources.alertBodyPendingSign.translateResource()),
+                                dismissButton: .default(Text("OK"))
+                            )
+                        }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
                 .background(AppColorsDAO.instance.system_color_3.getColorFromHex())
@@ -84,6 +90,7 @@ struct SignatureBoxView: View {
     @Binding public var showModal: Bool
     @Binding public var signatureImage: Image?
     @State var dragGesturePosition: CGFloat = 0
+    @State var showAlert = false
     var storedCanvas: PKDrawing
     private var screen = UIScreen.main.bounds
     
@@ -105,6 +112,11 @@ struct SignatureBoxView: View {
     }
     
     private func saveSignature() {
+        guard canvas.drawing.strokes.count > 0 else {
+            showAlert.toggle()
+            return
+        }
+
         bindcanvas = canvas
         let imageArea: CGRect = canvas.drawing.bounds
         signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))

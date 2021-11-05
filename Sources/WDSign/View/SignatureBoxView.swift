@@ -28,6 +28,7 @@ struct SignatureBoxView: View {
                     })
                     
                     Text(Constants.SystemResources.SignHere.translateResource())
+                        .font(.headline)
                         .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
                         .frame(maxWidth: .infinity, maxHeight: 44)
                     
@@ -66,6 +67,7 @@ struct SignatureBoxView: View {
                         .frame(width: 85, height: 44, alignment: .center)
                 })
                 .frame(maxWidth: .infinity, alignment: .trailing)
+                .disabled(!(canvas.drawing.strokes.count > 0))
             }
             .frame(width: 540, height: 343, alignment: .center)
             .background(Color.white)

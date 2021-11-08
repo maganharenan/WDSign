@@ -117,6 +117,8 @@ struct SignatureBoxView: View {
     }
     
     private func saveSignature() {
+        print(" stored inside save \(storedCanvas.strokes.count)")
+
         if canvas.drawing.strokes.count > 0 {
             bindcanvas = canvas
             let imageArea: CGRect = canvas.drawing.bounds
@@ -124,6 +126,7 @@ struct SignatureBoxView: View {
 
             showModal.toggle()
         }else {
+            print(" stored inside save \(storedCanvas.strokes.count)")
             showAlert.toggle()
         }
     }

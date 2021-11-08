@@ -107,7 +107,7 @@ struct SignatureBoxView: View {
     
     private func cancelSignature() {
         print("canvas \(canvas.drawing.strokes.count)")
-        print("storedCanvas \(storedCanvas.drawing.strokes.count)")
+        print("storedCanvas \(storedCanvas.strokes.count)")
         print("bindCanvas \(bindcanvas.drawing.strokes.count)")
 
         canvas.drawing = storedCanvas

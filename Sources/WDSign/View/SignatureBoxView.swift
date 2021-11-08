@@ -96,7 +96,7 @@ struct SignatureBoxView: View {
     
     init(canvas: Binding<PKCanvasView>, showModal: Binding<Bool>, signatureImage: Binding<Image?>) {
         self._bindcanvas = canvas
-        self.storedCanvas = canvas.wrappedValue.drawing
+        self.storedCanvas = canvas.drawing.wrappedValue // canvas.wrappedValue.drawing
         self._showModal = showModal
         self._signatureImage = signatureImage
     }
@@ -107,10 +107,8 @@ struct SignatureBoxView: View {
     
     private func cancelSignature() {
         canvas.drawing = storedCanvas
-        if canvas.drawing == storedCanvas {
         showModal.toggle()
         dragGesturePosition = 0
-        }
     }
     
     private func saveSignature() {

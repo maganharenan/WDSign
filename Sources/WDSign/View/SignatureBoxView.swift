@@ -117,7 +117,7 @@ struct SignatureBoxView: View {
             return
         }
 
-        bindcanvas = canvas
+        //bindcanvas = canvas
         let imageArea: CGRect = canvas.drawing.bounds
         signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
         

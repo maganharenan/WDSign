@@ -107,8 +107,10 @@ struct SignatureBoxView: View {
     
     private func cancelSignature() {
         canvas.drawing = storedCanvas
+        if canvas.drawing == storedCanvas {
         showModal.toggle()
         dragGesturePosition = 0
+        }
     }
     
     private func saveSignature() {

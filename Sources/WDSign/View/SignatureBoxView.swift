@@ -96,7 +96,7 @@ struct SignatureBoxView: View {
     
     init(canvas: Binding<PKCanvasView>, showModal: Binding<Bool>, signatureImage: Binding<Image?>) {
         self._bindcanvas = canvas
-        self.storedCanvas = canvas.drawing.wrappedValue // canvas.wrappedValue.drawing
+        self.storedCanvas = PKDrawing(strokes: canvas.drawing.strokes.wrappedValue)//canvas.drawing.wrappedValue
         self._showModal = showModal
         self._signatureImage = signatureImage
     }

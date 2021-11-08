@@ -107,6 +107,7 @@ struct SignatureBoxView: View {
     
     private func cancelSignature() {
         canvas.drawing = PKDrawing(strokes: storedCanvas.strokes)
+        bindcanvas = canvas
         showModal.toggle()
         dragGesturePosition = 0
     }
@@ -117,7 +118,7 @@ struct SignatureBoxView: View {
             return
         }
 
-        //bindcanvas = canvas
+        bindcanvas = canvas
         let imageArea: CGRect = canvas.drawing.bounds
         signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
         

@@ -106,7 +106,7 @@ struct SignatureBoxView: View {
     }
     
     private func cancelSignature() {
-        canvas.drawing = storedCanvas
+        canvas.drawing = PKDrawing(strokes: storedCanvas.strokes)
         showModal.toggle()
         dragGesturePosition = 0
     }

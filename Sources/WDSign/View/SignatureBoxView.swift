@@ -96,7 +96,7 @@ struct SignatureBoxView: View {
     
     init(canvas: Binding<PKCanvasView>, showModal: Binding<Bool>, signatureImage: Binding<Image?>) {
         self._bindcanvas = canvas
-        self.storedCanvas = PKDrawing(strokes: canvas.drawing.strokes.wrappedValue)//canvas.drawing.wrappedValue
+        self.storedCanvas = canvas.drawing.wrappedValue
         self._showModal = showModal
         self._signatureImage = signatureImage
     }
@@ -106,23 +106,22 @@ struct SignatureBoxView: View {
     }
     
     private func cancelSignature() {
-        canvas.drawing = PKDrawing(strokes: storedCanvas.strokes)
-        bindcanvas = canvas
+        canvas.drawing = storedCanvas
+        //bindcanvas = canvas
         showModal.toggle()
         dragGesturePosition = 0
     }
     
     private func saveSignature() {
-        guard canvas.drawing.strokes.count > 0 else {
-            showAlert.toggle()
-            return
-        }
+        if canvas.drawing.strokes.count > 0 {
+            bindcanvas = canvas
+            let imageArea: CGRect = canvas.drawing.bounds
+            signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
 
-        bindcanvas = canvas
-        let imageArea: CGRect = canvas.drawing.bounds
-        signatureImage = Image(uiImage: canvas.drawing.image(from: imageArea, scale: 1))
-        
-        showModal.toggle()
+            showModal.toggle()
+        }else {
+            showAlert.toggle()
+        }
     }
     
     func returnGesture() -> some Gesture {

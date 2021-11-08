@@ -127,7 +127,7 @@ struct SignatureBoxView: View {
             showModal.toggle()
         }else {
             print(" stored inside save \(storedCanvas.strokes.count)")
-            showAlert.toggle()
+            //showAlert.toggle()
         }
     }
     

@@ -113,7 +113,6 @@ struct SignatureBoxView: View {
     
     private func saveSignature() {
         guard canvas.drawing.strokes.count > 0 else {
-            canvas.drawing = storedCanvas
             showAlert.toggle()
             return
         }

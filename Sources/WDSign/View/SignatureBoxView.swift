@@ -41,6 +41,7 @@ struct SignatureBoxView: View {
                             .frame(width: 85, height: 44, alignment: .trailing)
                             .padding(.trailing, 16)
                     })
+                        .disabled(!hasStrokes())
                         .alert(isPresented: $showAlert) {
                             Alert(
                                 title: Text(Constants.SystemResources.alertTitlePendingSign.translateResource()),
@@ -100,16 +101,20 @@ struct SignatureBoxView: View {
         self._showModal = showModal
         self._signatureImage = signatureImage
     }
+
+    private func hasStrokes() -> Bool {
+        if canvas.drawing.strokes.count > 0 {
+            return true
+        }
+
+        return false
+    }
     
     private func eraseCanvas() {
         canvas.drawing = PKDrawing()
     }
     
     private func cancelSignature() {
-        print("canvas \(canvas.drawing.strokes.count)")
-        print("storedCanvas \(storedCanvas.strokes.count)")
-        print("bindCanvas \(bindcanvas.drawing.strokes.count)")
-
         canvas.drawing = storedCanvas
         bindcanvas = canvas
         showModal.toggle()
@@ -117,8 +122,6 @@ struct SignatureBoxView: View {
     }
     
     private func saveSignature() {
-        print(" stored inside save \(storedCanvas.strokes.count)")
-
         if canvas.drawing.strokes.count > 0 {
             bindcanvas = canvas
             let imageArea: CGRect = canvas.drawing.bounds
@@ -126,7 +129,6 @@ struct SignatureBoxView: View {
 
             showModal.toggle()
         }else {
-            print(" stored inside save \(storedCanvas.strokes.count)")
             //showAlert.toggle()
         }
     }

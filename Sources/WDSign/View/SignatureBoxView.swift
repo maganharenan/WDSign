@@ -37,7 +37,7 @@ struct SignatureBoxView: View {
                     }, label: {
                         Text(Constants.SystemResources.Save.translateResource())
                             .font(.headline)
-                            .foregroundColor(canvas.drawing.strokes.count > 0 ? AppColorsDAO.instance.system_color_15.getColorFromHex() : Color.gray)
+                            .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
                             .frame(width: 85, height: 44, alignment: .trailing)
                             .padding(.trailing, 16)
                     })

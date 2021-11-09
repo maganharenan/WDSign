@@ -37,7 +37,7 @@ struct SignatureBoxView: View {
                     }, label: {
                         Text(Constants.SystemResources.Save.translateResource())
                             .font(.headline)
-                            .foregroundColor(canvas.drawing.strokes > 0 ? AppColorsDAO.instance.system_color_15.getColorFromHex() : Color.gray)
+                            .foregroundColor(canvas.drawing.strokes.count > 0 ? AppColorsDAO.instance.system_color_15.getColorFromHex() : Color.gray)
                             .frame(width: 85, height: 44, alignment: .trailing)
                             .padding(.trailing, 16)
                     })
@@ -99,14 +99,6 @@ struct SignatureBoxView: View {
         self.storedCanvas = canvas.drawing.wrappedValue
         self._showModal = showModal
         self._signatureImage = signatureImage
-    }
-
-    private func hasStrokes() -> Bool {
-        if canvas.drawing.strokes.count > 0 {
-            return true
-        }
-
-        return false
     }
     
     private func eraseCanvas() {

@@ -22,14 +22,14 @@ struct SignatureBoxView: View {
                     }, label: {
                         Text(Constants.SystemResources.Cancel.translateResource())
                             .font(.body)
-                            .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
+                            .foregroundColor(AppColorsDAO.ColorFor.deleteButton.colorValue)
                             .frame(width: 85, height: 44, alignment: .leading)
                             .padding(.leading, 16)
                     })
                     
                     Text(Constants.SystemResources.SignHere.translateResource())
                         .font(.headline)
-                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
+                        .foregroundColor(AppColorsDAO.ColorFor.commonText.colorValue)
                         .frame(maxWidth: .infinity, maxHeight: 44)
                     
                     Button(action: {
@@ -37,7 +37,7 @@ struct SignatureBoxView: View {
                     }, label: {
                         Text(Constants.SystemResources.Save.translateResource())
                             .font(.headline)
-                            .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
+                            .foregroundColor(AppColorsDAO.ColorFor.affirmativeButtons.colorValue)
                             .frame(width: 85, height: 44, alignment: .trailing)
                             .padding(.trailing, 16)
                     })
@@ -50,7 +50,7 @@ struct SignatureBoxView: View {
                         }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
-                .background(AppColorsDAO.instance.system_color_3.getColorFromHex())
+                .background(AppColorsDAO.ColorFor.listHeaderBackground.colorValue)
                 .gesture(returnGesture())
                 
                 ZStack {
@@ -59,7 +59,7 @@ struct SignatureBoxView: View {
                     
                     Rectangle()
                         .frame(width: 456, height: 3, alignment: .center)
-                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
+                        .foregroundColor(AppColorsDAO.ColorFor.separatorLines.colorValue)
                         .padding(.bottom, 28)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
@@ -70,7 +70,7 @@ struct SignatureBoxView: View {
                 }, label: {
                     Text(Constants.SystemResources.Clean.translateResource())
                         .font(.body)
-                        .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
+                        .foregroundColor(AppColorsDAO.Colors.color21.colorValue)
                         .frame(width: 85, height: 44, alignment: .center)
                 })
                 .frame(maxWidth: .infinity, alignment: .trailing)

@@ -19,14 +19,14 @@ public struct WDSign: View {
                         }, label: {
                             Text(Constants.SystemResources.Cancel.translateResource())
                                 .font(.body)
-                                .foregroundColor(AppColorsDAO.instance.system_color_14.getColorFromHex())
+                                .foregroundColor(AppColorsDAO.ColorFor.deleteButton.colorValue)
                                 .frame(width: 100, height: 44)
                                 .opacity(buttonsOpactity)
                         })
                         
                         Text(viewModel.getDocumentLayoutInfo().title)
                             .font(.title2)
-                            .foregroundColor(AppColorsDAO.instance.system_color_7.getColorFromHex())
+                            .foregroundColor(AppColorsDAO.ColorFor.commonText.colorValue)
                             .frame(maxWidth: .infinity)
                             .opacity(buttonsOpactity)
                         
@@ -35,7 +35,7 @@ public struct WDSign: View {
                         }, label: {
                             Text(Constants.SystemResources.Save.translateResource())
                                 .font(.headline)
-                                .foregroundColor(AppColorsDAO.instance.system_color_15.getColorFromHex())
+                                .foregroundColor(AppColorsDAO.ColorFor.affirmativeButtons.colorValue)
                                 .frame(width: 100, height: 44)
                                 .opacity(buttonsOpactity)
                         })
@@ -52,7 +52,7 @@ public struct WDSign: View {
                     
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: 0.75)
-                        .foregroundColor(AppColorsDAO.instance.system_color_3.getColorFromHex())
+                        .foregroundColor(AppColorsDAO.ColorFor.separatorLines.colorValue)
                         .frame(maxWidth: .infinity, maxHeight: 50, alignment: .bottom)
                 }
                 

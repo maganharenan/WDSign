@@ -13,7 +13,7 @@ final class AppColorsDAO {
         return AppColorsDAO()
     }()
 
-    static private let parameterManager = SystemParameterDataManager.instance
+    static private let parameterManager = SystemParameterDAO.instance
 
     enum Colors: String {
         case color21 = "color_21"

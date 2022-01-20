@@ -220,6 +220,6 @@ final class AppColorsDAO {
     }
 
     static private func getHexValue(for color: Colors) -> String {
-        return parameterManager.getParameter(key: color.rawValue)
+        return parameterManager.getSystemParameter(with: color.rawValue)?.parameterValue ?? ""
     }
 }

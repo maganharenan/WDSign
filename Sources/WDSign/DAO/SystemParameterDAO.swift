@@ -27,6 +27,14 @@ final class SystemParameterDAO: SystemParameterDAOProtocol {
             return parameters.first(where: { $0.parameterKey == key.rawValue })
         }
     }
+
+    public func getSystemParameter(with key: String, formID: Int? = nil) -> SystemParameter? {
+        if let formID = formID {
+            return parameters.first(where: { $0.parameterKey == key && $0.formID == formID })
+        } else {
+            return parameters.first(where: { $0.parameterKey == key })
+        }
+    }
     
     // MARK: - Internal methods
     private func fetchParameters() -> Array<SystemParameter> {
